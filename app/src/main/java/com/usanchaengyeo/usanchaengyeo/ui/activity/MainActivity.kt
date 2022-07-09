@@ -1,12 +1,11 @@
 package com.usanchaengyeo.usanchaengyeo.ui.activity
 
-import android.os.Build
 import android.os.Bundle
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.usanchaengyeo.usanchaengyeo.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-@RequiresApi(Build.VERSION_CODES.N)
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding

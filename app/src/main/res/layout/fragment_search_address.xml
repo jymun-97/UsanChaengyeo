@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="viewmodel"
+            type="com.usanchaengyeo.usanchaengyeo.ui.viewmodel.AddressViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,7 +20,7 @@
             style="@style/AddressTextInputLayoutStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="주소를 입력하세요"
+            android:hint="장소를 입력하세요"
             android:textColorHint="@color/white"
             app:endIconDrawable="@drawable/ic_baseline_clear_24"
             app:endIconMode="clear_text"
@@ -35,6 +38,8 @@
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:maxLines="1"
+                android:onTextChanged="@{() -> viewmodel.searchAddress()}"
+                android:text="@={viewmodel.inputKeyword}"
                 android:textColor="@color/white"
                 android:textCursorDrawable="@drawable/shape_cursor" />
 

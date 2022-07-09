@@ -9,7 +9,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.usanchaengyeo.usanchaengyeo.databinding.FragmentHomeBinding
 import com.usanchaengyeo.usanchaengyeo.ui.viewmodel.AddressViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
