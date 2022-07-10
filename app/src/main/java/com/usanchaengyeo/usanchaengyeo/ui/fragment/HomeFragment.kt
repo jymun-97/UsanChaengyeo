@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.usanchaengyeo.usanchaengyeo.R
 import com.usanchaengyeo.usanchaengyeo.databinding.FragmentHomeBinding
 import com.usanchaengyeo.usanchaengyeo.ui.viewmodel.AddressViewModel
 
@@ -34,7 +33,7 @@ class HomeFragment : Fragment() {
         }
 
         binding.locationTextView.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_searchAddressFragment)
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToSearchAddressFragment())
         }
     }
 }
