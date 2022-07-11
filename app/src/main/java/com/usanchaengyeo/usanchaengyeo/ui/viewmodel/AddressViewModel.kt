@@ -8,6 +8,9 @@ import com.usanchaengyeo.usanchaengyeo.data.model.Address
 import com.usanchaengyeo.usanchaengyeo.data.repository.AddressRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,6 +24,13 @@ class AddressViewModel @Inject constructor(
     private var _addressList = MutableLiveData<List<Address>>()
     val addressList: LiveData<List<Address>>
         get() = _addressList
+
+    val historyList: StateFlow<List<Address>> =
+        addressRepository.loadHistory().stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = emptyList()
+        )
 
     val inputKeyword = MutableLiveData<String?>()
 

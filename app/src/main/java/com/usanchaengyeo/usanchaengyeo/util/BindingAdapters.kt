@@ -1,8 +1,11 @@
 package com.usanchaengyeo.usanchaengyeo.util
 
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.github.matteobattilana.weather.PrecipType
 import com.github.matteobattilana.weather.WeatherView
+import com.usanchaengyeo.usanchaengyeo.data.model.Address
+import com.usanchaengyeo.usanchaengyeo.ui.adapter.AddressAdapter
 
 object BindingAdapters {
 
@@ -10,5 +13,11 @@ object BindingAdapters {
     @JvmStatic
     fun setWeather(weatherView: WeatherView, weather: PrecipType) {
         weatherView.setWeatherData(weather)
+    }
+
+    @BindingAdapter("app:items")
+    @JvmStatic
+    fun setItems(recyclerView: RecyclerView, item: List<Address>) {
+        (recyclerView.adapter as AddressAdapter).submitList(item.toMutableList())
     }
 }

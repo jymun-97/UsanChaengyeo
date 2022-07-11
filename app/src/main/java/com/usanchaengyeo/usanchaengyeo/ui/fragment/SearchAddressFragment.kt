@@ -6,12 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.usanchaengyeo.usanchaengyeo.R
 import com.usanchaengyeo.usanchaengyeo.databinding.FragmentSearchAddressBinding
-import com.usanchaengyeo.usanchaengyeo.ui.adapter.AddressAdapter
 import com.usanchaengyeo.usanchaengyeo.ui.viewmodel.AddressViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,7 +14,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class SearchAddressFragment : Fragment() {
 
     private lateinit var binding: FragmentSearchAddressBinding
-    private lateinit var addressAdapter: AddressAdapter
     private val addressViewModel by activityViewModels<AddressViewModel>()
 
     override fun onCreateView(
@@ -37,35 +31,28 @@ class SearchAddressFragment : Fragment() {
 
         binding.apply {
             viewmodel = addressViewModel
-            lifecycleOwner = requireActivity()
+            lifecycleOwner = viewLifecycleOwner
         }
-        initRecyclerView()
 
-        addressViewModel.addressList.observe(viewLifecycleOwner) {
-            addressAdapter.submitList(it)
+        replaceChildFragment(historyFragment)
+        addressViewModel.inputKeyword.observe(viewLifecycleOwner) { keyword ->
+            when {
+                keyword.isNullOrEmpty() -> replaceChildFragment(historyFragment)
+
+                else -> replaceChildFragment(searchResultFragment)
+            }
         }
     }
 
-    private fun initRecyclerView() {
-        addressAdapter = AddressAdapter(
-            itemClicked = {
-                addressViewModel.apply {
-                    address.postValue(it.roadAddressName)
-                    addHistory(it)
-                }
-                findNavController().navigate(SearchAddressFragmentDirections.actionSearchAddressFragmentToHomeFragment())
-            }
-        )
-
-        binding.recyclerView.apply {
-            adapter = addressAdapter
-            layoutManager = LinearLayoutManager(requireActivity())
-
-            val decoration = DividerItemDecoration(requireActivity(), 1)
-            requireActivity().getDrawable(R.drawable.recyclerview_divider)
-                ?.let { decoration.setDrawable(it) }
-
-            addItemDecoration(decoration)
+    private fun replaceChildFragment(fragment: Fragment) {
+        childFragmentManager.beginTransaction().apply {
+            replace(binding.subFragmentContainerView.id, fragment)
+            commit()
         }
+    }
+
+    companion object {
+        val searchResultFragment = SearchResultFragment()
+        val historyFragment = HistoryFragment()
     }
 }
