@@ -9,7 +9,7 @@ import com.usanchaengyeo.usanchaengyeo.data.model.Address
 import com.usanchaengyeo.usanchaengyeo.databinding.ItemAddressBinding
 
 class AddressAdapter(
-    private val itemClicked: (String) -> Unit
+    private val itemClicked: (Address) -> Unit
 ) : ListAdapter<Address, AddressAdapter.ViewHolder>(diffUtil) {
 
     inner class ViewHolder(
@@ -19,10 +19,7 @@ class AddressAdapter(
         fun bind(address: Address) {
             binding.address = address
             binding.root.setOnClickListener {
-                itemClicked(
-                    if (address.roadAddressName.isNullOrEmpty()) address.placeName
-                    else address.roadAddressName
-                )
+                itemClicked(address)
             }
         }
     }

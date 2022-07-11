@@ -1,7 +1,7 @@
 package com.usanchaengyeo.usanchaengyeo.di
 
-import com.usanchaengyeo.usanchaengyeo.data.repository.AddressSearchRepository
-import com.usanchaengyeo.usanchaengyeo.data.repository.AddressSearchRepositoryImpl
+import com.usanchaengyeo.usanchaengyeo.data.repository.AddressRepository
+import com.usanchaengyeo.usanchaengyeo.data.repository.AddressRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -15,6 +15,6 @@ abstract class RepositoryModule {
     @Singleton
     @Binds
     abstract fun bindsAddressSearchRepository(
-        addressSearchRepositoryImpl: AddressSearchRepositoryImpl
-    ): AddressSearchRepository
+        addressRepositoryImpl: AddressRepositoryImpl
+    ): AddressRepository
 }

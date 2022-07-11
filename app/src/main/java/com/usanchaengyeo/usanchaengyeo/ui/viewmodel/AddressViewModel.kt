@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.usanchaengyeo.usanchaengyeo.data.model.SearchResponse
-import com.usanchaengyeo.usanchaengyeo.data.repository.AddressSearchRepository
+import com.usanchaengyeo.usanchaengyeo.data.model.Address
+import com.usanchaengyeo.usanchaengyeo.data.repository.AddressRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -13,27 +13,35 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AddressViewModel @Inject constructor(
-    private val addressSearchRepository: AddressSearchRepository
+    private val addressRepository: AddressRepository
 ) : ViewModel() {
 
-    val address = MutableLiveData<String>(INIT_ADDRESS)
+    val address = MutableLiveData(INIT_ADDRESS)
 
-    val _addressSearchResult = MutableLiveData<SearchResponse>()
-    val addressSearchResult: LiveData<SearchResponse>
-        get() = _addressSearchResult
+    private var _addressList = MutableLiveData<List<Address>>()
+    val addressList: LiveData<List<Address>>
+        get() = _addressList
 
     val inputKeyword = MutableLiveData<String?>()
 
     fun searchAddress() = viewModelScope.launch(Dispatchers.IO) {
         inputKeyword.value?.let { keyword ->
-            val response = addressSearchRepository.searchAddress(keyword)
+            val response = addressRepository.searchAddress(keyword)
 
             if (response.isSuccessful) {
                 response.body()?.let {
-                    _addressSearchResult.postValue(it)
+                    _addressList.postValue(it.addresses)
                 }
             }
         }
+    }
+
+    fun addHistory(history: Address) = viewModelScope.launch(Dispatchers.IO) {
+        addressRepository.addHistory(history)
+    }
+
+    fun deleteHistory(history: Address) = viewModelScope.launch(Dispatchers.IO) {
+        addressRepository.deleteHistory(history)
     }
 
     companion object {

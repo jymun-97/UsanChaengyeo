@@ -1,10 +1,14 @@
 package com.usanchaengyeo.usanchaengyeo.di
 
+import android.content.Context
+import androidx.room.Room
+import com.usanchaengyeo.usanchaengyeo.data.db.SearchHistoryDatabase
 import com.usanchaengyeo.usanchaengyeo.data.service.AddressSearchService
 import com.usanchaengyeo.usanchaengyeo.util.Const.KAKAO_BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -41,5 +45,18 @@ object AppModule {
     @Provides
     fun provideAddressSearchService(retrofit: Retrofit): AddressSearchService {
         return retrofit.create(AddressSearchService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideSearchHistoryDatabase(
+        @ApplicationContext context: Context
+    ): SearchHistoryDatabase {
+
+        return Room.databaseBuilder(
+            context.applicationContext,
+            SearchHistoryDatabase::class.java,
+            "serach-history"
+        ).build()
     }
 }

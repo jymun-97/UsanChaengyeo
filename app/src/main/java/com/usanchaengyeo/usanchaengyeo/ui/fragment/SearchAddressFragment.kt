@@ -41,17 +41,18 @@ class SearchAddressFragment : Fragment() {
         }
         initRecyclerView()
 
-        addressViewModel.addressSearchResult.observe(viewLifecycleOwner) { response ->
-            addressAdapter.submitList(
-                response.addresses
-            )
+        addressViewModel.addressList.observe(viewLifecycleOwner) {
+            addressAdapter.submitList(it)
         }
     }
 
     private fun initRecyclerView() {
         addressAdapter = AddressAdapter(
             itemClicked = {
-                addressViewModel.address.postValue(it)
+                addressViewModel.apply {
+                    address.postValue(it.roadAddressName)
+                    addHistory(it)
+                }
                 findNavController().navigate(SearchAddressFragmentDirections.actionSearchAddressFragmentToHomeFragment())
             }
         )
