@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/background_gradient_blue"
+        android:padding="40dp"
         tools:context=".ui.MainActivity">
 
         <com.github.matteobattilana.weather.WeatherView
@@ -20,14 +21,11 @@
             android:layout_height="match_parent"
             app:weather="@{PrecipType.RAIN}" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="150dp"
-            android:fontFamily="@font/bm_yeonsung"
-            android:text="우산챙겨?"
-            android:textColor="@color/white"
-            android:textSize="80sp"
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainerView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
