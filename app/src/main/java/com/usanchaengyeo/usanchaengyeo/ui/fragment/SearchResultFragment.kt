@@ -49,7 +49,7 @@ class SearchResultFragment : Fragment() {
         addressAdapter = AddressAdapter(
             itemClicked = {
                 addressViewModel.apply {
-                    address.postValue(it.roadAddressName)
+                    selectedAddress.postValue(it)
                     addHistory(it)
                 }
                 findNavController().navigate(SearchAddressFragmentDirections.actionSearchAddressFragmentToHomeFragment())

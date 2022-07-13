@@ -19,7 +19,7 @@ class AddressViewModel @Inject constructor(
     private val addressRepository: AddressRepository
 ) : ViewModel() {
 
-    val address = MutableLiveData(INIT_ADDRESS)
+    val selectedAddress = MutableLiveData<Address?>(null)
 
     private var _addressList = MutableLiveData<List<Address>>()
     val addressList: LiveData<List<Address>>
@@ -52,9 +52,5 @@ class AddressViewModel @Inject constructor(
 
     fun deleteHistory(history: Address) = viewModelScope.launch(Dispatchers.IO) {
         addressRepository.deleteHistory(history)
-    }
-
-    companion object {
-        const val INIT_ADDRESS = "위치를 입력하세요."
     }
 }

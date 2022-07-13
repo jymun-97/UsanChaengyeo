@@ -48,9 +48,11 @@ class HistoryFragment : Fragment() {
         addressAdapter = AddressAdapter(
             itemClicked = {
                 addressViewModel.apply {
-                    address.postValue(it.roadAddressName)
+                    selectedAddress.postValue(it)
                 }
-                findNavController().navigate(SearchAddressFragmentDirections.actionSearchAddressFragmentToHomeFragment())
+                findNavController().navigate(
+                    SearchAddressFragmentDirections.actionSearchAddressFragmentToHomeFragment()
+                )
             }
         )
         binding.historyRecyclerView.apply {

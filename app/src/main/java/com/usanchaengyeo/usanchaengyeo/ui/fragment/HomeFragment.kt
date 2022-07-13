@@ -15,6 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
+
     private val addressViewModel by activityViewModels<AddressViewModel>()
 
     override fun onCreateView(
