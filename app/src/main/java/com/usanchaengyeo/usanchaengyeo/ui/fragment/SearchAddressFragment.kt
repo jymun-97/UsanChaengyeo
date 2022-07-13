@@ -6,7 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.usanchaengyeo.usanchaengyeo.R
 import com.usanchaengyeo.usanchaengyeo.databinding.FragmentSearchAddressBinding
+import com.usanchaengyeo.usanchaengyeo.ui.adapter.AddressAdapter
 import com.usanchaengyeo.usanchaengyeo.ui.viewmodel.AddressViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -14,6 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class SearchAddressFragment : Fragment() {
 
     private lateinit var binding: FragmentSearchAddressBinding
+    private lateinit var addressAdapter: AddressAdapter
     private val addressViewModel by activityViewModels<AddressViewModel>()
 
     override fun onCreateView(
@@ -32,6 +38,33 @@ class SearchAddressFragment : Fragment() {
         binding.apply {
             viewmodel = addressViewModel
             lifecycleOwner = requireActivity()
+        }
+        initRecyclerView()
+
+        addressViewModel.addressSearchResult.observe(viewLifecycleOwner) { response ->
+            addressAdapter.submitList(
+                response.addresses
+            )
+        }
+    }
+
+    private fun initRecyclerView() {
+        addressAdapter = AddressAdapter(
+            itemClicked = {
+                addressViewModel.address.postValue(it)
+                findNavController().navigate(SearchAddressFragmentDirections.actionSearchAddressFragmentToHomeFragment())
+            }
+        )
+
+        binding.recyclerView.apply {
+            adapter = addressAdapter
+            layoutManager = LinearLayoutManager(requireActivity())
+
+            val decoration = DividerItemDecoration(requireActivity(), 1)
+            requireActivity().getDrawable(R.drawable.recyclerview_divider)
+                ?.let { decoration.setDrawable(it) }
+
+            addItemDecoration(decoration)
         }
     }
 }

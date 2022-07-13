@@ -16,11 +16,9 @@ class AddressViewModel @Inject constructor(
     private val addressSearchRepository: AddressSearchRepository
 ) : ViewModel() {
 
-    private val _address = MutableLiveData<String>(INIT_ADDRESS)
-    val address: LiveData<String>
-        get() = _address
+    val address = MutableLiveData<String>(INIT_ADDRESS)
 
-    private val _addressSearchResult = MutableLiveData<SearchResponse>()
+    val _addressSearchResult = MutableLiveData<SearchResponse>()
     val addressSearchResult: LiveData<SearchResponse>
         get() = _addressSearchResult
 
