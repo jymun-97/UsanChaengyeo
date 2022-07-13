@@ -2,7 +2,7 @@ package com.usanchaengyeo.usanchaengyeo.data.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.usanchaengyeo.usanchaengyeo.data.model.Address
+import com.usanchaengyeo.usanchaengyeo.data.model.address.Address
 
 @Database(
     entities = [Address::class],

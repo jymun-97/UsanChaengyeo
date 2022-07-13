@@ -6,7 +6,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.github.matteobattilana.weather.PrecipType
 import com.github.matteobattilana.weather.WeatherView
-import com.usanchaengyeo.usanchaengyeo.data.model.Address
+import com.usanchaengyeo.usanchaengyeo.data.model.address.Address
 import com.usanchaengyeo.usanchaengyeo.ui.adapter.AddressAdapter
 
 object BindingAdapters {

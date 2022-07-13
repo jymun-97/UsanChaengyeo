@@ -1,4 +1,4 @@
-package com.usanchaengyeo.usanchaengyeo.data.model
+package com.usanchaengyeo.usanchaengyeo.data.model.address
 
 
 import androidx.room.Entity

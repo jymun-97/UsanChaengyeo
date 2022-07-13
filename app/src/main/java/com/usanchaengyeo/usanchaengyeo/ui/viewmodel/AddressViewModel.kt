@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.usanchaengyeo.usanchaengyeo.data.model.Address
+import com.usanchaengyeo.usanchaengyeo.data.model.address.Address
 import com.usanchaengyeo.usanchaengyeo.data.repository.AddressRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

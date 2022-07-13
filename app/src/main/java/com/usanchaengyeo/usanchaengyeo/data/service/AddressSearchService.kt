@@ -1,6 +1,6 @@
 package com.usanchaengyeo.usanchaengyeo.data.service
 
-import com.usanchaengyeo.usanchaengyeo.data.model.SearchResponse
+import com.usanchaengyeo.usanchaengyeo.data.model.address.SearchResponse
 import com.usanchaengyeo.usanchaengyeo.util.Const.KAKAO_API_KEY
 import retrofit2.Response
 import retrofit2.http.GET

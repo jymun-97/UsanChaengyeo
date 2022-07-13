@@ -1,7 +1,7 @@
 package com.usanchaengyeo.usanchaengyeo.data.db
 
 import androidx.room.*
-import com.usanchaengyeo.usanchaengyeo.data.model.Address
+import com.usanchaengyeo.usanchaengyeo.data.model.address.Address
 import kotlinx.coroutines.flow.Flow
 
 @Dao

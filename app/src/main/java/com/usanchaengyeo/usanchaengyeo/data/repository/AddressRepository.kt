@@ -1,7 +1,7 @@
 package com.usanchaengyeo.usanchaengyeo.data.repository
 
-import com.usanchaengyeo.usanchaengyeo.data.model.Address
-import com.usanchaengyeo.usanchaengyeo.data.model.SearchResponse
+import com.usanchaengyeo.usanchaengyeo.data.model.address.Address
+import com.usanchaengyeo.usanchaengyeo.data.model.address.SearchResponse
 import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 

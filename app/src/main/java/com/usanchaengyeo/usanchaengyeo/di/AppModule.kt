@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.room.Room
 import com.usanchaengyeo.usanchaengyeo.data.db.SearchHistoryDatabase
 import com.usanchaengyeo.usanchaengyeo.data.service.AddressSearchService
+import com.usanchaengyeo.usanchaengyeo.data.service.ForecastService
+import com.usanchaengyeo.usanchaengyeo.util.Const.FORECAST_BASE_URL
 import com.usanchaengyeo.usanchaengyeo.util.Const.KAKAO_BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -45,6 +47,22 @@ object AppModule {
     @Provides
     fun provideAddressSearchService(retrofit: Retrofit): AddressSearchService {
         return retrofit.create(AddressSearchService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideForecastRetrofitClient(okHttpClient: OkHttpClient): Retrofit {
+        return Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl(FORECAST_BASE_URL)
+            .client(okHttpClient)
+            .build()
+    }
+
+    @Singleton
+    @Provides
+    fun provideForecastService(retrofit: Retrofit): ForecastService {
+        return retrofit.create(ForecastService::class.java)
     }
 
     @Singleton
