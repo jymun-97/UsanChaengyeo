@@ -22,7 +22,9 @@ class MainActivity : AppCompatActivity() {
 
         testForecast()
         viewModel.forecastList.observe(this) {
-            Log.d("# MainActivity", "$it")
+            it.forEach {
+                Log.d("# MainActivity", "$it")
+            }
         }
     }
 

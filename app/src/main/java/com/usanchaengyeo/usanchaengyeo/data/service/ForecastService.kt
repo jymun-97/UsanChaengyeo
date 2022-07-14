@@ -8,9 +8,8 @@ import retrofit2.http.Query
 
 interface ForecastService {
 
-    @GET("/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst")
+    @GET("/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst?ServiceKey=$FORECAST_API_KEY")
     suspend fun runForecast(
-        @Query("ServiceKey") apiKey: String = FORECAST_API_KEY,
         @Query("pageNo") page: Int = 1,
         @Query("numOfRows") numOfRows: Int = 1000,
         @Query("dataType") dataType: String = "JSON",

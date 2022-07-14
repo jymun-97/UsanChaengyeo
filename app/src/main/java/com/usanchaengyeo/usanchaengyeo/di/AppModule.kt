@@ -2,6 +2,8 @@ package com.usanchaengyeo.usanchaengyeo.di
 
 import android.content.Context
 import androidx.room.Room
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.usanchaengyeo.usanchaengyeo.data.db.SearchHistoryDatabase
 import com.usanchaengyeo.usanchaengyeo.data.service.AddressSearchService
 import com.usanchaengyeo.usanchaengyeo.data.service.ForecastService
@@ -43,9 +45,13 @@ object AppModule {
     }
 
     @Singleton
+    @Provides
+    fun provideGson() = GsonBuilder().setLenient().create()
+
+    @Singleton
     @AddressRetrofit
     @Provides
-    fun provideKakaoRetrofitClient(okHttpClient: OkHttpClient): Retrofit {
+    fun provideKakaoRetrofitClient(okHttpClient: OkHttpClient, gson: Gson): Retrofit {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(KAKAO_BASE_URL)
@@ -65,7 +71,7 @@ object AppModule {
     @Singleton
     @ForecastRetrofit
     @Provides
-    fun provideForecastRetrofitClient(okHttpClient: OkHttpClient): Retrofit {
+    fun provideForecastRetrofitClient(okHttpClient: OkHttpClient, gson: Gson): Retrofit {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(FORECAST_BASE_URL)

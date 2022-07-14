@@ -1,6 +1,5 @@
 package com.usanchaengyeo.usanchaengyeo.util
 
-import android.util.Log
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -27,6 +26,5 @@ object BindingAdapters {
     @JvmStatic
     fun setLocationText(textView: TextView, address: Address?) {
         textView.text = address?.placeName ?: "장소를 입력하세요."
-        Log.d("# BindingAdapters", "$address")
     }
 }
