@@ -1,12 +1,13 @@
 package com.usanchaengyeo.usanchaengyeo.ui.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.usanchaengyeo.usanchaengyeo.data.model.address.Address
 import com.usanchaengyeo.usanchaengyeo.data.model.forecast.Forecast
 import com.usanchaengyeo.usanchaengyeo.data.repository.ForecastRepository
+import com.usanchaengyeo.usanchaengyeo.util.CoordinatesConverter
 import com.usanchaengyeo.usanchaengyeo.util.ForecastManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -22,13 +23,16 @@ class ForecastViewModel @Inject constructor(
     val forecastList: LiveData<List<Forecast>>
         get() = _forecastList
 
-    fun runForecast() = viewModelScope.launch(Dispatchers.IO) {
-        Log.d("# ForecastViewModel", "${ForecastManager.date} ${ForecastManager.time}")
+    fun runForecast(selectedAddress: Address) = viewModelScope.launch(Dispatchers.IO) {
+        val coordinate = CoordinatesConverter.convert(
+            selectedAddress.x.toDouble(),
+            selectedAddress.y.toDouble()
+        )
         val response = forecastRepository.runForecast(
             ForecastManager.date,
             ForecastManager.time,
-            66,
-            100
+            coordinate.first,
+            coordinate.second
         )
         if (response.isSuccessful) {
             response.body()?.let {

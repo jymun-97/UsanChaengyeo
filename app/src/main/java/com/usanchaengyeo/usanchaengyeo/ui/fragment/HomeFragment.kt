@@ -32,11 +32,19 @@ class HomeFragment : Fragment() {
 
         binding.apply {
             viewmodel = addressViewModel
-            lifecycleOwner = requireActivity()
+            lifecycleOwner = viewLifecycleOwner
         }
 
         binding.locationTextView.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToSearchAddressFragment())
+        }
+        binding.checkButton.setOnClickListener {
+            val selectedAddress = addressViewModel.selectedAddress.value
+            selectedAddress?.let {
+                findNavController().navigate(
+                    HomeFragmentDirections.actionHomeFragmentToForecastFragment(it)
+                )
+            }
         }
     }
 }
