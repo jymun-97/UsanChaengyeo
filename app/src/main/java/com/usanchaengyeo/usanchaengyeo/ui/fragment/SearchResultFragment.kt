@@ -40,9 +40,6 @@ class SearchResultFragment : Fragment() {
         }
 
         initRecyclerView()
-        addressViewModel.addressList.observe(viewLifecycleOwner) {
-            addressAdapter.submitList(it)
-        }
     }
 
     private fun initRecyclerView() {

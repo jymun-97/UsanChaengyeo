@@ -19,6 +19,7 @@
             android:id="@+id/searchResultRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:items="@{viewmodel.addressList}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     </LinearLayout>

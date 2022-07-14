@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -11,29 +12,48 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:gravity="center"
-        android:orientation="horizontal"
+        android:layout_height="match_parent"
+        android:gravity="center|bottom"
+        android:orientation="vertical"
         tools:background="@drawable/background_gradient_blue">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
             android:layout_marginHorizontal="20dp"
-            android:text="@{forecast.fcstTime}"
+            android:autoSizeMaxTextSize="16sp"
+            android:autoSizeMinTextSize="10sp"
+            android:autoSizeStepGranularity="1sp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@{forecast.fcstValue.equals(`강수없음`) ? `0` : forecast.fcstValue.replaceAll(`.0mm`, ``)}"
             android:textColor="@color/white"
-            android:textSize="16sp"
-            tools:text="00:00" />
+            android:textSize="14sp"
+            tools:text="0" />
+
+        <View
+            android:id="@+id/bar"
+            android:layout_width="30dp"
+            android:layout_height="5dp"
+            android:layout_marginVertical="10dp"
+            android:background="@color/white"
+            app:setBar="@{forecast.fcstValue}"
+            tools:background="@color/white" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
             android:layout_marginHorizontal="20dp"
-            android:text="@{forecast.fcstValue}"
+            android:autoSizeMaxTextSize="16sp"
+            android:autoSizeMinTextSize="10sp"
+            android:autoSizeStepGranularity="1sp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@{forecast.fcstTime.substring(0, 2) + `시`}"
             android:textColor="@color/white"
-            android:textSize="16sp"
-            tools:text="0" />
+            tools:text="00시" />
 
     </LinearLayout>
 </layout>

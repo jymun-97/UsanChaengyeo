@@ -23,22 +23,26 @@ class ForecastViewModel @Inject constructor(
     val forecastList: LiveData<List<Forecast>>
         get() = _forecastList
 
-    fun runForecast(selectedAddress: Address) = viewModelScope.launch(Dispatchers.IO) {
+    lateinit var selectedAddress: Address
+
+    fun runForecast() = viewModelScope.launch(Dispatchers.IO) {
         val coordinate = CoordinatesConverter.convert(
             selectedAddress.x.toDouble(),
             selectedAddress.y.toDouble()
         )
         val response = forecastRepository.runForecast(
             ForecastManager.date,
+//            "20220713",
             ForecastManager.time,
+//            "1200",
             coordinate.first,
             coordinate.second
         )
         if (response.isSuccessful) {
             response.body()?.let {
-                _forecastList.postValue(
+                val filteredForecastList =
                     ForecastManager.filterForecast(it.response.body.items.forecast)
-                )
+                _forecastList.postValue(filteredForecastList)
             }
         }
     }
