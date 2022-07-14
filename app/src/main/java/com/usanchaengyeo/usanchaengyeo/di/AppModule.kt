@@ -16,11 +16,20 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Qualifier
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class AddressRetrofit
+
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class ForecastRetrofit
 
     @Singleton
     @Provides
@@ -34,6 +43,7 @@ object AppModule {
     }
 
     @Singleton
+    @AddressRetrofit
     @Provides
     fun provideKakaoRetrofitClient(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
@@ -44,12 +54,16 @@ object AppModule {
     }
 
     @Singleton
+    @AddressRetrofit
     @Provides
-    fun provideAddressSearchService(retrofit: Retrofit): AddressSearchService {
+    fun provideAddressSearchService(
+        @AddressRetrofit retrofit: Retrofit
+    ): AddressSearchService {
         return retrofit.create(AddressSearchService::class.java)
     }
 
     @Singleton
+    @ForecastRetrofit
     @Provides
     fun provideForecastRetrofitClient(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
@@ -60,8 +74,11 @@ object AppModule {
     }
 
     @Singleton
+    @ForecastRetrofit
     @Provides
-    fun provideForecastService(retrofit: Retrofit): ForecastService {
+    fun provideForecastService(
+        @ForecastRetrofit retrofit: Retrofit
+    ): ForecastService {
         return retrofit.create(ForecastService::class.java)
     }
 
