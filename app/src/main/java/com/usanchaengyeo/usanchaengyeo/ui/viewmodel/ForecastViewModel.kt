@@ -30,6 +30,7 @@ class ForecastViewModel @Inject constructor(
     lateinit var selectedAddress: Address
 
     fun runForecast() = viewModelScope.launch(Dispatchers.IO) {
+        _forecastList.postValue(emptyList())
         _isLoading.postValue(true)
 
         val coordinate = CoordinatesConverter.convert(
