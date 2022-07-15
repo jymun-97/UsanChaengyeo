@@ -23,9 +23,15 @@ class ForecastViewModel @Inject constructor(
     val forecastList: LiveData<List<Forecast>>
         get() = _forecastList
 
+    private val _isLoading = MutableLiveData<Boolean>(false)
+    val isLoading: LiveData<Boolean>
+        get() = _isLoading
+
     lateinit var selectedAddress: Address
 
     fun runForecast() = viewModelScope.launch(Dispatchers.IO) {
+        _isLoading.postValue(true)
+
         val coordinate = CoordinatesConverter.convert(
             selectedAddress.x.toDouble(),
             selectedAddress.y.toDouble()
@@ -45,5 +51,7 @@ class ForecastViewModel @Inject constructor(
                 _forecastList.postValue(filteredForecastList)
             }
         }
+
+        _isLoading.postValue(false)
     }
 }
