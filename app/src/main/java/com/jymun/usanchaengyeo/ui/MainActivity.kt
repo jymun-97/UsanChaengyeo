@@ -1,7 +1,8 @@
-package com.jymun.usanchaengyeo
+package com.jymun.usanchaengyeo.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.jymun.usanchaengyeo.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
