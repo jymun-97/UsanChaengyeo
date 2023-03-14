@@ -13,4 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "UsanChaengyeo"
-include ':app'
+include(":app")
