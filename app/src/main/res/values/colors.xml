@@ -7,4 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="app_signature_light">#0B2F4A</color>
+    <color name="app_signature">#041B2C</color>
+    <color name="app_signature_dark">#000E19</color>
 </resources>
