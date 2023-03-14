@@ -3,6 +3,7 @@ package com.jymun.harusekki.ui.base
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.jymun.usanchaengyeo.ui.base.LoadState
 import com.jymun.usanchaengyeo.util.dispatcher.DispatcherProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
