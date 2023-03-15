@@ -11,4 +11,8 @@
     <color name="app_signature_light">#0B2F4A</color>
     <color name="app_signature">#041B2C</color>
     <color name="app_signature_dark">#000E19</color>
+
+    <color name="gray_light">#E3E3E3</color>
+    <color name="gray_dark">#454545</color>
+    <color name="gray">#B5B5B5</color>
 </resources>
