@@ -18,13 +18,20 @@ import com.google.android.gms.location.Priority
 import com.google.android.material.snackbar.Snackbar
 import com.jymun.usanchaengyeo.R
 import com.jymun.usanchaengyeo.databinding.ActivityMainBinding
+import com.jymun.usanchaengyeo.domain.address.CoordinateToAddressUseCase
 import com.jymun.usanchaengyeo.ui.base.BaseActivity
 import com.jymun.usanchaengyeo.util.resources.ResourcesProvider
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
+
+    @Inject
+    lateinit var coordinateToAddressUseCase: CoordinateToAddressUseCase
 
     @Inject
     lateinit var resourcesProvider: ResourcesProvider
@@ -76,7 +83,10 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
             Priority.PRIORITY_HIGH_ACCURACY,
             null
         ).addOnSuccessListener { location ->
-            Log.d("# MainActivity", "$location")
+            CoroutineScope(Dispatchers.IO).launch {
+                val result = coordinateToAddressUseCase(location.longitude, location.latitude)
+                Log.d("# MainActivity", "$result")
+            }
         }.addOnFailureListener {
             Log.d("# MainActivity", "$it")
         }
