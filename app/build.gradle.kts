@@ -1,9 +1,13 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     id(Plugins.ANDROID_APPLICATION)
     id(Plugins.KOTLIN_ANDROID)
     id(Plugins.KAPT)
     id(Plugins.HILT)
 }
+
+val addressServiceKey: String = gradleLocalProperties(rootDir).getProperty("address_service_key")
 
 android {
     namespace = "com.jymun.usanchaengyeo"
@@ -26,6 +30,9 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+        }
+        getByName("debug") {
+            buildConfigField("String", "address_service_key", addressServiceKey)
         }
     }
     compileOptions {
