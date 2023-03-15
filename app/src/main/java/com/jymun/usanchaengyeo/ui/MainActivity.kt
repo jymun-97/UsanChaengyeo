@@ -42,8 +42,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
 
         initFusedLocationProviderClient()
         initPermissionLauncher()
-
-        permissionLauncher.launch(REQUIRED_PERMISSIONS)
+        launchPermissionLauncher()
     }
 
     private fun initFusedLocationProviderClient() {
@@ -65,10 +64,9 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
         ActivityCompat.checkSelfPermission(this, COURSE_LOCATION_PERMISSION) -> {
             updateCurrentLocation()
             showRequestFineLocationPermissionSnackBar()
-            // todo. show snack bar
         }
-        else -> {
-            // todo. show dialog
+        else -> showRequestPermissionDialog() {
+            moveToApplicationDetailsSettings()
         }
     }
 
@@ -101,10 +99,21 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
         startActivity(intent)
     }
 
+    private fun showRequestPermissionDialog(
+        onPositiveButtonClickListener: () -> Unit
+    ) {
+        RequestPermissionDialog(onPositiveButtonClickListener).apply {
+            isCancelable = true
+            show(supportFragmentManager, tag)
+        }
+    }
+
+    private fun launchPermissionLauncher() = permissionLauncher.launch(REQUIRED_PERMISSIONS)
+
     companion object {
         private const val FINE_LOCATION_PERMISSION = Manifest.permission.ACCESS_FINE_LOCATION
         private const val COURSE_LOCATION_PERMISSION = Manifest.permission.ACCESS_COARSE_LOCATION
-        
+
         private val REQUIRED_PERMISSIONS = arrayOf(
             FINE_LOCATION_PERMISSION,
             COURSE_LOCATION_PERMISSION
