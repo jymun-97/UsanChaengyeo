@@ -22,4 +22,6 @@ object Versions {
     const val FRAGMENT_KTX = "1.5.4"
     const val WEATHER_VIEW = "3.0.0"
     const val LOCATION_SERVICE = "21.0.1"
+    const val RETROFIT = "2.9.0"
+    const val OKHTTP3 = "4.10.0"
 }

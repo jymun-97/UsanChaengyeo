@@ -1,9 +1,13 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     id(Plugins.ANDROID_APPLICATION)
     id(Plugins.KOTLIN_ANDROID)
     id(Plugins.KAPT)
     id(Plugins.HILT)
 }
+
+val addressServiceKey: String = gradleLocalProperties(rootDir).getProperty("address_service_key")
 
 android {
     namespace = "com.jymun.usanchaengyeo"
@@ -26,6 +30,9 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+        }
+        getByName("debug") {
+            buildConfigField("String", "address_service_key", addressServiceKey)
         }
     }
     compileOptions {
@@ -71,6 +78,12 @@ dependencies {
 
     // Location Service
     implementation(Dependencies.LOCATION_SERVICE)
+
+    // Retrofit
+    implementation(Dependencies.RETROFIT)
+    implementation(Dependencies.GSON_CONVERTER)
+    implementation(Dependencies.OKHTTP3)
+    implementation(Dependencies.OKHTTP3_INTERCEPTOR)
 }
 
 kapt {
