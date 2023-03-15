@@ -21,4 +21,5 @@ object Versions {
     const val ACTIVITY_KTX = "1.6.1"
     const val FRAGMENT_KTX = "1.5.4"
     const val WEATHER_VIEW = "3.0.0"
+    const val LOCATION_SERVICE = "21.0.1"
 }

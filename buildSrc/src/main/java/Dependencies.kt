@@ -17,5 +17,11 @@ object Dependencies {
     const val LIVEDATA = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.LIFECYCLE}"
     const val ACTIVITY_KTX = "androidx.activity:activity-ktx:${Versions.ACTIVITY_KTX}"
     const val FRAGMENT_KTX = "androidx.fragment:fragment-ktx:${Versions.FRAGMENT_KTX}"
+
+    // WeatherView
     const val WEATHER_VIEW = "com.github.MatteoBattilana:WeatherView:${Versions.WEATHER_VIEW}"
+
+    // Location Service
+    const val LOCATION_SERVICE =
+        "com.google.android.gms:play-services-location:${Versions.LOCATION_SERVICE}"
 }

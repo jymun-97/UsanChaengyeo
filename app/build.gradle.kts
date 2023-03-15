@@ -68,6 +68,9 @@ dependencies {
 
     // WeatherView
     implementation(Dependencies.WEATHER_VIEW)
+
+    // Location Service
+    implementation(Dependencies.LOCATION_SERVICE)
 }
 
 kapt {
