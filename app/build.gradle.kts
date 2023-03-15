@@ -71,6 +71,12 @@ dependencies {
 
     // Location Service
     implementation(Dependencies.LOCATION_SERVICE)
+
+    // Retrofit
+    implementation(Dependencies.RETROFIT)
+    implementation(Dependencies.GSON_CONVERTER)
+    implementation(Dependencies.OKHTTP3)
+    implementation(Dependencies.OKHTTP3_INTERCEPTOR)
 }
 
 kapt {

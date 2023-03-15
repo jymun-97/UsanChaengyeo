@@ -24,4 +24,10 @@ object Dependencies {
     // Location Service
     const val LOCATION_SERVICE =
         "com.google.android.gms:play-services-location:${Versions.LOCATION_SERVICE}"
+
+    // Retrofit
+    const val RETROFIT = "com.squareup.retrofit2:retrofit:${Versions.RETROFIT}"
+    const val GSON_CONVERTER = "com.squareup.retrofit2:converter-gson:${Versions.RETROFIT}"
+    const val OKHTTP3 = "com.squareup.okhttp3:okhttp:${Versions.OKHTTP3}"
+    const val OKHTTP3_INTERCEPTOR = "com.squareup.okhttp3:logging-interceptor:${Versions.OKHTTP3}"
 }
