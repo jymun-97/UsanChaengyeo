@@ -13,6 +13,8 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
 
     override fun getViewDataBinding() = ActivityMainBinding.inflate(layoutInflater)
 
+    override fun getWeatherViewInstance() = binding.weatherView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
