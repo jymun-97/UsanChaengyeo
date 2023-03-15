@@ -65,6 +65,9 @@ dependencies {
     implementation(Dependencies.LIVEDATA)
     implementation(Dependencies.ACTIVITY_KTX)
     implementation(Dependencies.FRAGMENT_KTX)
+
+    // WeatherView
+    implementation(Dependencies.WEATHER_VIEW)
 }
 
 kapt {
