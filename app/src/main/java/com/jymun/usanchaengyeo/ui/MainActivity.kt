@@ -73,7 +73,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
         }
     }
 
-    private fun checkPermissions() = when (PackageManager.PERMISSION_GRANTED) {
+    private fun checkPermissions(): Any = when (PackageManager.PERMISSION_GRANTED) {
         ActivityCompat.checkSelfPermission(this, FINE_LOCATION_PERMISSION) -> {
             updateCurrentLocation()
         }
@@ -81,8 +81,11 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
             updateCurrentLocation()
             showRequestFineLocationPermissionSnackBar()
         }
-        else -> showRequestPermissionDialog() {
-            moveToApplicationDetailsSettings()
+        else -> {
+            showRequestPermissionDialog() { moveToApplicationDetailsSettings() }
+            binding.addressView.submitAddress(
+                stateText = resourcesProvider.getString(R.string.location_permission_not_granted)
+            )
         }
     }
 
