@@ -55,7 +55,11 @@ class EditAddressView(
 
                 showKeyboard()
             } else {
-                submitAddress(address)
+                submitAddress(
+                    stateText = addressEditText.text.toString().ifEmpty {
+                        addressTextInputLayout.hint.toString()
+                    }
+                )
             }
         }
     }

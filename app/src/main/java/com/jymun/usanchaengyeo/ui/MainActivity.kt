@@ -17,6 +17,9 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
+import androidx.navigation.NavController
+import androidx.navigation.NavOptions
+import androidx.navigation.fragment.NavHostFragment
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
@@ -38,6 +41,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
     lateinit var resourcesProvider: ResourcesProvider
     private lateinit var permissionLauncher: ActivityResultLauncher<Array<String>>
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    private lateinit var navController: NavController
 
     override val viewModel: MainViewModel by viewModels()
 
@@ -53,6 +57,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        initNavigation()
         initAddressView()
         initFusedLocationProviderClient()
         initPermissionLauncher()
@@ -65,13 +70,35 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
                     ?: resourcesProvider.getString(R.string.loading_address)
             )
         }
-        viewModel.searchKeyword.observe(this) {
-
+        viewModel.searchKeyword.observe(this) { searchKeyword ->
+            replaceFragment(searchKeyword)
         }
     }
 
+    private fun initNavigation() {
+        val navHost =
+            supportFragmentManager.findFragmentById(binding.fragmentContainerView.id) as NavHostFragment
+        navController = navHost.navController
+    }
+
     private fun initAddressView() = binding.addressView.setOnClickListener {
-        Log.d("# MainActivity", "initAddressView() called")
+        val searchKeyword = viewModel.searchKeyword.value
+        replaceFragment(searchKeyword)
+    }
+
+    private fun replaceFragment(searchKeyword: String?) {
+        val destination = if (searchKeyword.isNullOrEmpty()) {
+            R.id.fragment_search_history
+        } else {
+            R.id.fragment_search_address
+        }
+        navController.navigate(
+            destination,
+            null,
+            NavOptions.Builder()
+                .setPopUpTo(navController.graph.startDestinationId, false)
+                .build()
+        )
     }
 
     private fun initFusedLocationProviderClient() {
