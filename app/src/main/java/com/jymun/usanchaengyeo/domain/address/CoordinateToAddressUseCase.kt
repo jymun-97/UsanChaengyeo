@@ -1,6 +1,7 @@
 package com.jymun.usanchaengyeo.domain.address
 
-import com.jymun.usanchaengyeo.data.entity.address.AddressName
+import com.jymun.usanchaengyeo.data.model.ModelType
+import com.jymun.usanchaengyeo.data.model.address.Address
 import com.jymun.usanchaengyeo.data.repository.address.AddressRepository
 import com.jymun.usanchaengyeo.util.dispatcher.DispatcherProvider
 import kotlinx.coroutines.withContext
@@ -16,8 +17,24 @@ class CoordinateToAddressUseCase @Inject constructor(
     suspend operator fun invoke(
         longitude: Double,
         latitude: Double
-    ): AddressName = withContext(dispatcherProvider.default) {
+    ): Address = withContext(dispatcherProvider.default) {
 
-        return@withContext addressRepository.coordinateToAddress(longitude, latitude)
+        val addressName = addressRepository.coordinateToAddress(longitude, latitude)
+        val addressEntityList = addressRepository.searchAddress(addressName.addressName)
+
+        if (addressEntityList.isEmpty()) {
+
+        }
+
+        val entity = addressEntityList.first()
+        return@withContext Address(
+            id = "${entity.placeName} ${entity.addressName}".hashCode().toLong(),
+            type = ModelType.ADDRESS,
+            placeName = entity.placeName,
+            addressName = entity.addressName,
+            roadAddressName = entity.roadAddressName,
+            x = entity.x,
+            y = entity.y
+        )
     }
 }
