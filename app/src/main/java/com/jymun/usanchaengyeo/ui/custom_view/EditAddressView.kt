@@ -43,11 +43,7 @@ class EditAddressView(
 
     private fun initViews() = binding.apply {
         initAddressTextInput()
-
-        root.setOnClickListener {
-            addressTextInputLayout.visibility = View.VISIBLE
-            addressEditText.requestFocus()
-        }
+        setOnClickListener {}
     }
 
     private fun initAddressTextInput() = binding.apply {
@@ -109,6 +105,15 @@ class EditAddressView(
         @JvmStatic
         fun getKeyword(view: EditAddressView): String {
             return view.binding.addressEditText.text.toString()
+        }
+    }
+
+    override fun setOnClickListener(l: OnClickListener?) = with(binding) {
+        root.setOnClickListener {
+            addressTextInputLayout.visibility = View.VISIBLE
+            addressEditText.requestFocus()
+
+            l?.onClick(this@EditAddressView)
         }
     }
 }

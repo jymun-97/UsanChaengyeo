@@ -53,6 +53,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        initAddressView()
         initFusedLocationProviderClient()
         initPermissionLauncher()
         launchPermissionLauncher()
@@ -65,8 +66,12 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
             )
         }
         viewModel.searchKeyword.observe(this) {
-            Log.d("# MainActivity", it)
+
         }
+    }
+
+    private fun initAddressView() = binding.addressView.setOnClickListener {
+        Log.d("# MainActivity", "initAddressView() called")
     }
 
     private fun initFusedLocationProviderClient() {
