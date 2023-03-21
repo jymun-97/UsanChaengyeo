@@ -12,7 +12,7 @@ abstract class BaseActivity<VM : BaseViewModel, B : ViewDataBinding> : AppCompat
     abstract val viewModel: VM
 
     protected lateinit var binding: B
-    protected lateinit var weatherView: WeatherView
+    private lateinit var weatherView: WeatherView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +20,7 @@ abstract class BaseActivity<VM : BaseViewModel, B : ViewDataBinding> : AppCompat
         binding = getViewDataBinding()
         setContentView(binding.root)
 
+        setUpBinding()
         weatherView = getWeatherViewInstance()
     }
 
@@ -32,6 +33,8 @@ abstract class BaseActivity<VM : BaseViewModel, B : ViewDataBinding> : AppCompat
         super.onStop()
         weatherView.resetWeather()
     }
+
+    abstract fun setUpBinding(): B
 
     abstract fun getViewDataBinding(): B
 
