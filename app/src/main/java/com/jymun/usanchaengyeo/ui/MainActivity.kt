@@ -2,12 +2,17 @@ package com.jymun.usanchaengyeo.ui
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Rect
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
+import android.view.MotionEvent
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -18,7 +23,6 @@ import com.google.android.gms.location.Priority
 import com.google.android.material.snackbar.Snackbar
 import com.jymun.usanchaengyeo.R
 import com.jymun.usanchaengyeo.databinding.ActivityMainBinding
-import com.jymun.usanchaengyeo.domain.address.CoordinateToAddressUseCase
 import com.jymun.usanchaengyeo.ui.base.BaseActivity
 import com.jymun.usanchaengyeo.util.resources.ResourcesProvider
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,9 +33,6 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
-
-    @Inject
-    lateinit var coordinateToAddressUseCase: CoordinateToAddressUseCase
 
     @Inject
     lateinit var resourcesProvider: ResourcesProvider
@@ -52,8 +53,11 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
         launchPermissionLauncher()
 
         viewModel.selectedAddress.observe(this) {
-            it ?: return@observe
-            Log.d("# MainActivity", "$it")
+            binding.addressView.submitAddress(
+                newAddress = it,
+                stateText = it?.let { null }
+                    ?: resourcesProvider.getString(R.string.loading_address)
+            )
         }
     }
 
@@ -123,6 +127,23 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
     }
 
     private fun launchPermissionLauncher() = permissionLauncher.launch(REQUIRED_PERMISSIONS)
+
+    override fun dispatchTouchEvent(event: MotionEvent?): Boolean {
+        if (event?.action == MotionEvent.ACTION_DOWN) {
+            val view = currentFocus
+            if (view is EditText) {
+                val outRect = Rect()
+                view.getGlobalVisibleRect(outRect)
+                if (!outRect.contains(event.rawX.toInt(), event.rawY.toInt())) {
+                    view.clearFocus()
+                    val imm: InputMethodManager =
+                        getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0)
+                }
+            }
+        }
+        return super.dispatchTouchEvent(event)
+    }
 
     companion object {
         private const val FINE_LOCATION_PERMISSION = Manifest.permission.ACCESS_FINE_LOCATION
