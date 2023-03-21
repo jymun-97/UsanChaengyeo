@@ -1,6 +1,7 @@
 package com.jymun.usanchaengyeo.data.source.address
 
 import com.jymun.usanchaengyeo.data.entity.address.AddressName
+import com.jymun.usanchaengyeo.data.entity.address.AddressResponse
 import com.jymun.usanchaengyeo.data.service.AddressService
 import com.jymun.usanchaengyeo.util.dispatcher.DispatcherProvider
 import kotlinx.coroutines.withContext
@@ -17,6 +18,14 @@ class AddressRemoteDataSource @Inject constructor(
     ): AddressName = withContext(dispatcherProvider.io) {
 
         val response = addressService.coordinateToAddressName(longitude, latitude)
+        return@withContext response.body()!!
+    }
+
+    override suspend fun searchAddress(
+        keyword: String
+    ): AddressResponse = withContext(dispatcherProvider.io) {
+
+        val response = addressService.searchAddressByKeyword(keyword)
         return@withContext response.body()!!
     }
 }
