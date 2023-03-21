@@ -50,6 +50,11 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
         initFusedLocationProviderClient()
         initPermissionLauncher()
         launchPermissionLauncher()
+
+        viewModel.selectedAddress.observe(this) {
+            it ?: return@observe
+            Log.d("# MainActivity", "$it")
+        }
     }
 
     private fun initFusedLocationProviderClient() {
@@ -84,8 +89,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
             null
         ).addOnSuccessListener { location ->
             CoroutineScope(Dispatchers.IO).launch {
-                val result = coordinateToAddressUseCase(location.longitude, location.latitude)
-                Log.d("# MainActivity", "$result")
+                viewModel.coordinateToAddress(location.longitude, location.latitude)
             }
         }.addOnFailureListener {
             Log.d("# MainActivity", "$it")
