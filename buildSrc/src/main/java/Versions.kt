@@ -24,4 +24,5 @@ object Versions {
     const val LOCATION_SERVICE = "21.0.1"
     const val RETROFIT = "2.9.0"
     const val OKHTTP3 = "4.10.0"
+    const val NAVIGATION = "2.5.3"
 }

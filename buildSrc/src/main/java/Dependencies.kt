@@ -30,4 +30,9 @@ object Dependencies {
     const val GSON_CONVERTER = "com.squareup.retrofit2:converter-gson:${Versions.RETROFIT}"
     const val OKHTTP3 = "com.squareup.okhttp3:okhttp:${Versions.OKHTTP3}"
     const val OKHTTP3_INTERCEPTOR = "com.squareup.okhttp3:logging-interceptor:${Versions.OKHTTP3}"
+
+    // Navigation
+    const val NAVIGATION_FRAGMENT_KTX =
+        "androidx.navigation:navigation-fragment-ktx:${Versions.NAVIGATION}"
+    const val NAVIGATION_UI_KTX = "androidx.navigation:navigation-ui-ktx:${Versions.NAVIGATION}"
 }

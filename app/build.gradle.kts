@@ -84,6 +84,10 @@ dependencies {
     implementation(Dependencies.GSON_CONVERTER)
     implementation(Dependencies.OKHTTP3)
     implementation(Dependencies.OKHTTP3_INTERCEPTOR)
+
+    // Navigation
+    implementation(Dependencies.NAVIGATION_UI_KTX)
+    implementation(Dependencies.NAVIGATION_FRAGMENT_KTX)
 }
 
 kapt {
