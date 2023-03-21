@@ -45,6 +45,11 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
 
     override fun getWeatherViewInstance() = binding.weatherView
 
+    override fun setUpBinding() = binding.apply {
+        viewModel = this@MainActivity.viewModel
+        lifecycleOwner = this@MainActivity
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -58,6 +63,9 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
                 stateText = it?.let { null }
                     ?: resourcesProvider.getString(R.string.loading_address)
             )
+        }
+        viewModel.searchKeyword.observe(this) {
+            Log.d("# MainActivity", it)
         }
     }
 

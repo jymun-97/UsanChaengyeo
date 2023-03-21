@@ -19,6 +19,8 @@ class MainViewModel @Inject constructor(
     val selectedAddress: LiveData<Address?>
         get() = _selectedAddress
 
+    val searchKeyword = MutableLiveData<String>()
+
     fun coordinateToAddress(
         longitude: Double,
         latitude: Double
