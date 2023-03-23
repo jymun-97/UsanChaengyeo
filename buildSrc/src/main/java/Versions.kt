@@ -25,4 +25,5 @@ object Versions {
     const val RETROFIT = "2.9.0"
     const val OKHTTP3 = "4.10.0"
     const val NAVIGATION = "2.5.3"
+    const val ROOM = "2.4.3"
 }
