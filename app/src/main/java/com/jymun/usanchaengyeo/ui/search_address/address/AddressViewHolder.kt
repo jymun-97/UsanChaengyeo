@@ -13,5 +13,10 @@ class AddressViewHolder(
 
     override fun bindData(model: Address, adapterListener: AdapterListener?) {
         binding.address = model
+        (adapterListener as? AddressAdapterListener)?.let { listener ->
+            binding.root.setOnClickListener {
+                listener.onAddressItemClicked(model)
+            }
+        }
     }
 }

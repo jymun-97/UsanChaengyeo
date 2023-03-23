@@ -6,14 +6,7 @@
     <fragment
         android:id="@+id/fragment_forecast"
         android:name="com.jymun.usanchaengyeo.ui.forecast.ForecastFragment"
-        android:label="ForecastFragment">
-        <action
-            android:id="@+id/action_fragment_forecast_to_fragment_search_history"
-            app:destination="@id/fragment_search_history" />
-        <action
-            android:id="@+id/action_fragment_forecast_to_fragment_search_address"
-            app:destination="@id/fragment_search_address" />
-    </fragment>
+        android:label="ForecastFragment" />
     <fragment
         android:id="@+id/fragment_search_history"
         android:name="com.jymun.usanchaengyeo.ui.search_history.SearchHistoryFragment"
@@ -21,5 +14,13 @@
     <fragment
         android:id="@+id/fragment_search_address"
         android:name="com.jymun.usanchaengyeo.ui.search_address.SearchAddressFragment"
-        android:label="SearchAddressFragment" />
+        android:label="SearchAddressFragment">
+        <action
+            android:id="@+id/action_fragment_search_address_to_fragment_forecast"
+            app:destination="@id/fragment_forecast"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
 </navigation>
