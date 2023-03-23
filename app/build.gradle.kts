@@ -5,6 +5,7 @@ plugins {
     id(Plugins.KOTLIN_ANDROID)
     id(Plugins.KAPT)
     id(Plugins.HILT)
+    id(Plugins.NAVIGATION_SAFE_ARGS)
 }
 
 val addressServiceKey: String = gradleLocalProperties(rootDir).getProperty("address_service_key")

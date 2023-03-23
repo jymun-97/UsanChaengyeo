@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.jymun.usanchaengyeo.ui.MainViewModel" />
+            type="com.jymun.usanchaengyeo.ui.search_address.SearchAddressViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -48,6 +48,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/app_content_background"
+            android:paddingTop="10dp"
             app:defaultNavHost="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

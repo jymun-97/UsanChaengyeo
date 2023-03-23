@@ -27,6 +27,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.jymun.usanchaengyeo.R
 import com.jymun.usanchaengyeo.databinding.ActivityMainBinding
 import com.jymun.usanchaengyeo.ui.base.BaseActivity
+import com.jymun.usanchaengyeo.ui.search_address.SearchAddressViewModel
 import com.jymun.usanchaengyeo.util.resources.ResourcesProvider
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -35,7 +36,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
+class MainActivity : BaseActivity<SearchAddressViewModel, ActivityMainBinding>() {
 
     @Inject
     lateinit var resourcesProvider: ResourcesProvider
@@ -43,7 +44,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var navController: NavController
 
-    override val viewModel: MainViewModel by viewModels()
+    override val viewModel: SearchAddressViewModel by viewModels()
 
     override fun getViewDataBinding() = ActivityMainBinding.inflate(layoutInflater)
 
