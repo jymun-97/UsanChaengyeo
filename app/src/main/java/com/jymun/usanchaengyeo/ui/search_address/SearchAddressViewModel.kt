@@ -1,4 +1,4 @@
-package com.jymun.usanchaengyeo.ui
+package com.jymun.usanchaengyeo.ui.search_address
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -12,7 +12,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(
+class SearchAddressViewModel @Inject constructor(
     dispatcherProvider: DispatcherProvider,
     private val coordinateToAddressUseCase: CoordinateToAddressUseCase,
     private val searchAddressUseCase: SearchAddressUseCase

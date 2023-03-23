@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.jymun.usanchaengyeo.ui.MainViewModel" />
+            type="com.jymun.usanchaengyeo.ui.search_address.SearchAddressViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -7,7 +7,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jymun.usanchaengyeo.data.model.address.Address
 import com.jymun.usanchaengyeo.databinding.FragmentSearchAddressBinding
-import com.jymun.usanchaengyeo.ui.MainViewModel
 import com.jymun.usanchaengyeo.ui.base.BaseFragment
 import com.jymun.usanchaengyeo.ui.base.adapter.ModelRecyclerAdapter
 import com.jymun.usanchaengyeo.ui.search_address.address.AddressAdapterListener
@@ -16,12 +15,12 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class SearchAddressFragment : BaseFragment<MainViewModel, FragmentSearchAddressBinding>() {
+class SearchAddressFragment : BaseFragment<SearchAddressViewModel, FragmentSearchAddressBinding>() {
 
     @Inject
     lateinit var resourcesProvider: ResourcesProvider
 
-    override val viewModel: MainViewModel by activityViewModels()
+    override val viewModel: SearchAddressViewModel by activityViewModels()
 
     override fun getViewDataBinding() = FragmentSearchAddressBinding.inflate(layoutInflater)
 
