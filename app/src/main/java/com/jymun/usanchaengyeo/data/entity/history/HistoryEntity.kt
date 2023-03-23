@@ -10,5 +10,5 @@ data class HistoryEntity(
     val isPinned: Boolean
 ) {
     @PrimaryKey(autoGenerate = false)
-    private val dbKey = "${addressEntity.placeName} ${addressEntity.addressName}"
+    val dbKey = "${addressEntity.placeName} ${addressEntity.addressName}"
 }
