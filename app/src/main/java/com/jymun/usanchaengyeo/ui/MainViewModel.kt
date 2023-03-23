@@ -44,4 +44,8 @@ class MainViewModel @Inject constructor(
             coordinateToAddressUseCase(longitude, latitude)
         )
     }
+
+    fun updateSelectedAddress(address: Address) {
+        _selectedAddress.postValue(address)
+    }
 }

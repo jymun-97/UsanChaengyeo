@@ -43,6 +43,7 @@ class SearchAddressFragment : BaseFragment<MainViewModel, FragmentSearchAddressB
         adapter = ModelRecyclerAdapter<Address>(resourcesProvider).apply {
             addAdapterListener(object : AddressAdapterListener {
                 override fun onAddressItemClicked(address: Address) {
+                    viewModel.updateSelectedAddress(address)
                     moveToForecastFragment()
                     // todo. add history
                 }
