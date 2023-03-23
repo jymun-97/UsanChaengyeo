@@ -1,4 +1,4 @@
-package com.jymun.usanchaengyeo.ui.search_address
+package com.jymun.usanchaengyeo.ui.search_address.address
 
 import com.jymun.usanchaengyeo.data.model.address.Address
 import com.jymun.usanchaengyeo.databinding.ItemAddressBinding

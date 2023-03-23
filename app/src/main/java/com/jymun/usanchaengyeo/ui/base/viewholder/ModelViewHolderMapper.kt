@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import com.jymun.usanchaengyeo.data.model.Model
 import com.jymun.usanchaengyeo.data.model.ModelType
 import com.jymun.usanchaengyeo.databinding.ItemAddressBinding
-import com.jymun.usanchaengyeo.ui.search_address.AddressViewHolder
+import com.jymun.usanchaengyeo.ui.search_address.address.AddressViewHolder
 import com.jymun.usanchaengyeo.util.resources.ResourcesProvider
 
 object ModelViewHolderMapper {
