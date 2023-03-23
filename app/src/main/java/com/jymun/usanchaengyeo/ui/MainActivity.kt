@@ -89,7 +89,7 @@ class MainActivity : BaseActivity<SearchAddressViewModel, ActivityMainBinding>()
 
     private fun replaceFragment(searchKeyword: String?) {
         val destination = if (searchKeyword.isNullOrEmpty()) {
-            R.id.fragment_search_history
+            R.id.fragment_history
         } else {
             R.id.fragment_search_address
         }
