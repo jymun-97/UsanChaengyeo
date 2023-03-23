@@ -4,6 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.jymun.usanchaengyeo.data.model.Model
 import com.jymun.usanchaengyeo.data.model.ModelType
+import com.jymun.usanchaengyeo.databinding.ItemAddressBinding
+import com.jymun.usanchaengyeo.ui.search_address.AddressViewHolder
 import com.jymun.usanchaengyeo.util.resources.ResourcesProvider
 
 object ModelViewHolderMapper {
@@ -16,7 +18,10 @@ object ModelViewHolderMapper {
     ): ModelViewHolder<M> {
         val inflater = LayoutInflater.from(parent.context)
         return when (type) {
-            else -> {}
+            ModelType.ADDRESS -> AddressViewHolder(
+                ItemAddressBinding.inflate(inflater, parent, false),
+                resourcesProvider
+            )
         } as ModelViewHolder<M>
     }
 }
