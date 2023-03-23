@@ -10,7 +10,7 @@ import javax.inject.Inject
 class AddressRemoteDataSource @Inject constructor(
     private val dispatcherProvider: DispatcherProvider,
     private val addressService: AddressService
-) : AddressDataSource.Remote {
+) : AddressDataSource {
 
     override suspend fun coordinateToAddressName(
         longitude: Double,

@@ -2,6 +2,8 @@ package com.jymun.usanchaengyeo.di.data
 
 import com.jymun.usanchaengyeo.data.source.address.AddressDataSource
 import com.jymun.usanchaengyeo.data.source.address.AddressRemoteDataSource
+import com.jymun.usanchaengyeo.data.source.history.HistoryDataSource
+import com.jymun.usanchaengyeo.data.source.history.HistoryLocalDataSource
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -14,7 +16,13 @@ abstract class DataSourceModule {
 
     @Binds
     @Singleton
-    abstract fun bindsAddressRemoteDataSource(
+    abstract fun bindsAddressDataSource(
         addressRemoteDataSource: AddressRemoteDataSource
-    ): AddressDataSource.Remote
+    ): AddressDataSource
+
+    @Binds
+    @Singleton
+    abstract fun bindsHistoryDataSource(
+        historyLocalDataSource: HistoryLocalDataSource
+    ): HistoryDataSource
 }
