@@ -8,8 +8,8 @@
         android:name="com.jymun.usanchaengyeo.ui.forecast.ForecastFragment"
         android:label="ForecastFragment" />
     <fragment
-        android:id="@+id/fragment_search_history"
-        android:name="com.jymun.usanchaengyeo.ui.search_history.SearchHistoryFragment"
+        android:id="@+id/fragment_history"
+        android:name="com.jymun.usanchaengyeo.ui.history.HistoryFragment"
         android:label="SearchHistoryFragment" />
     <fragment
         android:id="@+id/fragment_search_address"
