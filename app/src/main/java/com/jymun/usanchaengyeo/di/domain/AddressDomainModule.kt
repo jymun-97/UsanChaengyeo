@@ -2,6 +2,7 @@ package com.jymun.usanchaengyeo.di.domain
 
 import com.jymun.usanchaengyeo.data.repository.address.AddressRepository
 import com.jymun.usanchaengyeo.domain.address.CoordinateToAddressUseCase
+import com.jymun.usanchaengyeo.domain.address.SearchAddressUseCase
 import com.jymun.usanchaengyeo.util.dispatcher.DispatcherProvider
 import dagger.Module
 import dagger.Provides
@@ -17,6 +18,14 @@ object AddressDomainModule {
         dispatcherProvider: DispatcherProvider,
         addressRepository: AddressRepository
     ) = CoordinateToAddressUseCase(
+        dispatcherProvider, addressRepository
+    )
+
+    @Provides
+    fun provideSearchAddressUseCase(
+        dispatcherProvider: DispatcherProvider,
+        addressRepository: AddressRepository
+    ) = SearchAddressUseCase(
         dispatcherProvider, addressRepository
     )
 }

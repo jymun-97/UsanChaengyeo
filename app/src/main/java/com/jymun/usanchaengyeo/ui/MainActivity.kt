@@ -25,8 +25,10 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 import com.google.android.material.snackbar.Snackbar
 import com.jymun.usanchaengyeo.R
+import com.jymun.usanchaengyeo.data.model.history.History
 import com.jymun.usanchaengyeo.databinding.ActivityMainBinding
 import com.jymun.usanchaengyeo.ui.base.BaseActivity
+import com.jymun.usanchaengyeo.ui.history.OnHistorySelectedListener
 import com.jymun.usanchaengyeo.ui.search_address.SearchAddressViewModel
 import com.jymun.usanchaengyeo.util.resources.ResourcesProvider
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,7 +38,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity : BaseActivity<SearchAddressViewModel, ActivityMainBinding>() {
+class MainActivity : BaseActivity<SearchAddressViewModel, ActivityMainBinding>(),
+    OnHistorySelectedListener {
 
     @Inject
     lateinit var resourcesProvider: ResourcesProvider
@@ -89,7 +92,7 @@ class MainActivity : BaseActivity<SearchAddressViewModel, ActivityMainBinding>()
 
     private fun replaceFragment(searchKeyword: String?) {
         val destination = if (searchKeyword.isNullOrEmpty()) {
-            R.id.fragment_search_history
+            R.id.fragment_history
         } else {
             R.id.fragment_search_address
         }
@@ -187,6 +190,10 @@ class MainActivity : BaseActivity<SearchAddressViewModel, ActivityMainBinding>()
             }
         }
         return super.dispatchTouchEvent(event)
+    }
+
+    override fun onHistorySelected(history: History) {
+        viewModel.updateSelectedAddress(history.address)
     }
 
     companion object {

@@ -5,12 +5,10 @@ import com.jymun.usanchaengyeo.data.entity.address.AddressResponse
 
 interface AddressDataSource {
 
-    interface Remote {
-        suspend fun coordinateToAddressName(
-            longitude: Double,
-            latitude: Double
-        ): AddressName
+    suspend fun coordinateToAddressName(
+        longitude: Double,
+        latitude: Double
+    ): AddressName
 
-        suspend fun searchAddress(keyword: String): AddressResponse
-    }
+    suspend fun searchAddress(keyword: String): AddressResponse
 }

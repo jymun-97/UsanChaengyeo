@@ -89,6 +89,14 @@ dependencies {
     // Navigation
     implementation(Dependencies.NAVIGATION_UI_KTX)
     implementation(Dependencies.NAVIGATION_FRAGMENT_KTX)
+
+    // Room
+    implementation(Dependencies.ROOM)
+    implementation(Dependencies.ROOM_KTX)
+    kapt(Dependencies.ROOM_COMPILER)
+
+    // RecyclerView Swipe Helper
+    implementation(Dependencies.SWIPE_HELPER)
 }
 
 kapt {

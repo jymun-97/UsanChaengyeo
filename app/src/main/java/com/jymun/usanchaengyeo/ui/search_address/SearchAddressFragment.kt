@@ -43,8 +43,9 @@ class SearchAddressFragment : BaseFragment<SearchAddressViewModel, FragmentSearc
             addAdapterListener(object : AddressAdapterListener {
                 override fun onAddressItemClicked(address: Address) {
                     viewModel.updateSelectedAddress(address)
+                    viewModel.addHistory(address)
+
                     moveToForecastFragment()
-                    // todo. add history
                 }
             })
         }

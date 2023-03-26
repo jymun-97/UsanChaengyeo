@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 class AddressRepositoryImpl @Inject constructor(
     private val dispatcherProvider: DispatcherProvider,
-    private val addressRemoteDataSource: AddressDataSource.Remote
+    private val addressRemoteDataSource: AddressDataSource
 ) : AddressRepository {
 
     override suspend fun coordinateToAddress(
