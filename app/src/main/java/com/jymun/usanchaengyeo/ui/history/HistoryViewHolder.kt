@@ -12,7 +12,11 @@ class HistoryViewHolder(
     resourcesProvider: ResourcesProvider
 ) : ModelViewHolder<History>(binding, resourcesProvider) {
 
+    lateinit var history: History
+
     override fun bindData(model: History, adapterListener: AdapterListener?) {
+        history = model
+
         binding.address = model.address
         binding.imageView.setImageDrawable(
             if (model.isPinned) resourcesProvider.getDrawable(R.drawable.ic_pin)
