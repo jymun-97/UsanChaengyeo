@@ -1,6 +1,7 @@
 package com.jymun.usanchaengyeo.ui.history
 
 import android.graphics.Canvas
+import android.util.TypedValue
 import androidx.recyclerview.widget.ItemTouchHelper.*
 import androidx.recyclerview.widget.RecyclerView
 import com.jymun.usanchaengyeo.R
@@ -48,6 +49,8 @@ class HistoryItemTouchCallback(
             .addSwipeRightBackgroundColor(resourcesProvider.getColor(R.color.transparent_green))
             .addSwipeRightLabel(resourcesProvider.getString(R.string.pin))
             .setSwipeRightLabelColor(resourcesProvider.getColor(R.color.white))
+            .addCornerRadius(TypedValue.COMPLEX_UNIT_DIP, 12)
+            .addPadding(TypedValue.COMPLEX_UNIT_DIP, 0F, 14F, 0F)
             .create()
             .decorate()
 
