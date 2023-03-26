@@ -9,6 +9,7 @@ plugins {
 }
 
 val addressServiceKey: String = gradleLocalProperties(rootDir).getProperty("address_service_key")
+val forecastServiceKey: String = gradleLocalProperties(rootDir).getProperty("forecast_api_key")
 
 android {
     namespace = "com.jymun.usanchaengyeo"
@@ -34,6 +35,7 @@ android {
         }
         getByName("debug") {
             buildConfigField("String", "address_service_key", addressServiceKey)
+            buildConfigField("String", "forecast_api_key", forecastServiceKey)
         }
     }
     compileOptions {

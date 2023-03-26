@@ -3,13 +3,15 @@ package com.jymun.usanchaengyeo.data.source.address
 import com.jymun.usanchaengyeo.data.entity.address.AddressName
 import com.jymun.usanchaengyeo.data.entity.address.AddressResponse
 import com.jymun.usanchaengyeo.data.service.AddressService
+import com.jymun.usanchaengyeo.di.data.NetworkModule
 import com.jymun.usanchaengyeo.util.dispatcher.DispatcherProvider
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class AddressRemoteDataSource @Inject constructor(
     private val dispatcherProvider: DispatcherProvider,
-    private val addressService: AddressService
+    @NetworkModule.AddressServiceClient
+    private val addressServiceClient: AddressService
 ) : AddressDataSource {
 
     override suspend fun coordinateToAddressName(
@@ -17,7 +19,7 @@ class AddressRemoteDataSource @Inject constructor(
         latitude: Double
     ): AddressName = withContext(dispatcherProvider.io) {
 
-        val response = addressService.coordinateToAddressName(longitude, latitude)
+        val response = addressServiceClient.coordinateToAddressName(longitude, latitude)
         return@withContext response.body()!!
     }
 
@@ -25,7 +27,7 @@ class AddressRemoteDataSource @Inject constructor(
         keyword: String
     ): AddressResponse = withContext(dispatcherProvider.io) {
 
-        val response = addressService.searchAddressByKeyword(keyword)
+        val response = addressServiceClient.searchAddressByKeyword(keyword)
         return@withContext response.body()!!
     }
 }
