@@ -4,6 +4,7 @@ import com.jymun.usanchaengyeo.data.repository.history.HistoryRepository
 import com.jymun.usanchaengyeo.domain.history.AddHistoryUseCase
 import com.jymun.usanchaengyeo.domain.history.DeleteHistoryUseCase
 import com.jymun.usanchaengyeo.domain.history.LoadHistoryUseCase
+import com.jymun.usanchaengyeo.domain.history.PinHistoryUseCase
 import com.jymun.usanchaengyeo.util.dispatcher.DispatcherProvider
 import dagger.Module
 import dagger.Provides
@@ -31,4 +32,10 @@ object HistoryDomainModule {
         dispatcherProvider: DispatcherProvider,
         historyRepository: HistoryRepository
     ) = DeleteHistoryUseCase(dispatcherProvider, historyRepository)
+
+    @Provides
+    fun providePinHistoryUseCase(
+        dispatcherProvider: DispatcherProvider,
+        historyRepository: HistoryRepository
+    ) = PinHistoryUseCase(dispatcherProvider, historyRepository)
 }
