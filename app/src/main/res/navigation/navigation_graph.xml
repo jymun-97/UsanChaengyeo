@@ -10,7 +10,15 @@
     <fragment
         android:id="@+id/fragment_history"
         android:name="com.jymun.usanchaengyeo.ui.history.HistoryFragment"
-        android:label="SearchHistoryFragment" />
+        android:label="SearchHistoryFragment">
+        <action
+            android:id="@+id/action_fragment_history_to_fragment_forecast"
+            app:destination="@id/fragment_forecast"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
     <fragment
         android:id="@+id/fragment_search_address"
         android:name="com.jymun.usanchaengyeo.ui.search_address.SearchAddressFragment"

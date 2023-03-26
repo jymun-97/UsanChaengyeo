@@ -1,8 +1,10 @@
 package com.jymun.usanchaengyeo.ui.history
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
@@ -21,6 +23,8 @@ class HistoryFragment : BaseFragment<HistoryViewModel, FragmentHistoryBinding>()
     @Inject
     lateinit var resourcesProvider: ResourcesProvider
 
+    private var onHistorySelectedListener: OnHistorySelectedListener? = null
+
     override val viewModel: HistoryViewModel by viewModels()
 
     override fun getViewDataBinding() = FragmentHistoryBinding.inflate(layoutInflater)
@@ -31,6 +35,13 @@ class HistoryFragment : BaseFragment<HistoryViewModel, FragmentHistoryBinding>()
     }
 
     override fun observeState() {}
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        if (context is OnHistorySelectedListener) onHistorySelectedListener = context
+        else return
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,8 +54,19 @@ class HistoryFragment : BaseFragment<HistoryViewModel, FragmentHistoryBinding>()
 
     private fun initHistoryRecyclerView() = binding.historyRecyclerView.apply {
         layoutManager = LinearLayoutManager(requireActivity())
-        adapter = ModelRecyclerAdapter<History>(resourcesProvider)
+        adapter = ModelRecyclerAdapter<History>(resourcesProvider).apply {
+            addAdapterListener(object : HistoryAdapterListener {
+                override fun onHistoryItemClicked(history: History) {
+                    onHistorySelectedListener?.onHistorySelected(history)
+                    moveToForecastFragment()
+                }
+            })
+        }
     }
+
+    private fun moveToForecastFragment() = findNavController().navigate(
+        HistoryFragmentDirections.actionFragmentHistoryToFragmentForecast()
+    )
 
     private fun initSwipeHelper() {
         val historyItemTouchHelper = ItemTouchHelper(

@@ -22,5 +22,8 @@ class HistoryViewHolder(
             if (model.isPinned) resourcesProvider.getDrawable(R.drawable.ic_pin)
             else resourcesProvider.getDrawable(R.drawable.ic_history)
         )
+        binding.root.setOnClickListener {
+            (adapterListener as? HistoryAdapterListener)?.onHistoryItemClicked(model)
+        }
     }
 }
