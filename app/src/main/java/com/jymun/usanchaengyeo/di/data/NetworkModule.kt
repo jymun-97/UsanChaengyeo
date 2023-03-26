@@ -5,6 +5,7 @@ import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.jymun.usanchaengyeo.data.service.AddressService
+import com.jymun.usanchaengyeo.data.service.ForecastService
 import com.jymun.usanchaengyeo.data.service.NetworkConstant
 import dagger.Module
 import dagger.Provides
@@ -15,11 +16,20 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Qualifier
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
+
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class AddressServiceClient
+
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class ForecastServiceClient
 
     @Provides
     @Singleton
@@ -42,7 +52,8 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRetrofitClient(
+    @AddressServiceClient
+    fun provideAddressRetrofitClient(
         okHttpClient: OkHttpClient,
         gson: Gson
     ): Retrofit =
@@ -54,6 +65,32 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideSearchRecipeService(retrofit: Retrofit): AddressService =
+    @AddressServiceClient
+    fun provideAddressService(
+        @AddressServiceClient
+        retrofit: Retrofit
+    ): AddressService =
         retrofit.create(AddressService::class.java)
+
+    @Provides
+    @Singleton
+    @ForecastServiceClient
+    fun provideForecastRetrofitClient(
+        okHttpClient: OkHttpClient,
+        gson: Gson
+    ): Retrofit =
+        Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .baseUrl(NetworkConstant.FORECAST_BASE_URL)
+            .client(okHttpClient)
+            .build()
+
+    @Provides
+    @Singleton
+    @ForecastServiceClient
+    fun provideForecastService(
+        @ForecastServiceClient
+        retrofit: Retrofit
+    ): ForecastService =
+        retrofit.create(ForecastService::class.java)
 }
