@@ -25,9 +25,11 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 import com.google.android.material.snackbar.Snackbar
 import com.jymun.usanchaengyeo.R
+import com.jymun.usanchaengyeo.data.model.address.Address
 import com.jymun.usanchaengyeo.data.model.history.History
 import com.jymun.usanchaengyeo.databinding.ActivityMainBinding
 import com.jymun.usanchaengyeo.ui.base.BaseActivity
+import com.jymun.usanchaengyeo.ui.forecast.ForecastFragment
 import com.jymun.usanchaengyeo.ui.history.OnHistorySelectedListener
 import com.jymun.usanchaengyeo.ui.search_address.SearchAddressViewModel
 import com.jymun.usanchaengyeo.util.resources.ResourcesProvider
@@ -43,9 +45,11 @@ class MainActivity : BaseActivity<SearchAddressViewModel, ActivityMainBinding>()
 
     @Inject
     lateinit var resourcesProvider: ResourcesProvider
+
     private lateinit var permissionLauncher: ActivityResultLauncher<Array<String>>
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var navController: NavController
+    private lateinit var forecastFragment: ForecastFragment
 
     override val viewModel: SearchAddressViewModel by viewModels()
 
@@ -68,11 +72,7 @@ class MainActivity : BaseActivity<SearchAddressViewModel, ActivityMainBinding>()
         launchPermissionLauncher()
 
         viewModel.selectedAddress.observe(this) {
-            binding.addressView.submitAddress(
-                newAddress = it,
-                stateText = it?.let { null }
-                    ?: resourcesProvider.getString(R.string.loading_address)
-            )
+            submitAddress(it)
         }
         viewModel.searchKeyword.observe(this) { searchKeyword ->
             replaceFragment(searchKeyword)
@@ -82,12 +82,23 @@ class MainActivity : BaseActivity<SearchAddressViewModel, ActivityMainBinding>()
     private fun initNavigation() {
         val navHost =
             supportFragmentManager.findFragmentById(binding.fragmentContainerView.id) as NavHostFragment
+
         navController = navHost.navController
+        forecastFragment = navHost.childFragmentManager.fragments[0] as ForecastFragment
     }
 
     private fun initAddressView() = binding.addressView.setOnClickListener {
         val searchKeyword = viewModel.searchKeyword.value
         replaceFragment(searchKeyword)
+    }
+
+    private fun submitAddress(address: Address?) {
+        binding.addressView.submitAddress(
+            newAddress = address,
+            stateText = address?.let { null }
+                ?: resourcesProvider.getString(R.string.loading_address)
+        )
+        forecastFragment.submitSelectedAddress(address)
     }
 
     private fun replaceFragment(searchKeyword: String?) {
