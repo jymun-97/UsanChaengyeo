@@ -94,6 +94,9 @@ dependencies {
     implementation(Dependencies.ROOM)
     implementation(Dependencies.ROOM_KTX)
     kapt(Dependencies.ROOM_COMPILER)
+
+    // RecyclerView Swipe Helper
+    implementation(Dependencies.SWIPE_HELPER)
 }
 
 kapt {
