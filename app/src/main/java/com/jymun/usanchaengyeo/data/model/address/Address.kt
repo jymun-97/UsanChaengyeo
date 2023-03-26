@@ -10,8 +10,8 @@ data class Address(
     private val placeName: String,
     private val addressName: String,
     private val roadAddressName: String,
-    private val x: String,
-    private val y: String
+    val x: String,
+    val y: String
 ) : Model(id, type) {
 
     val addressText = placeName.ifEmpty { roadAddressName.ifEmpty { addressName } }
