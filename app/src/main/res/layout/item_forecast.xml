@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="forecast"
+            type="com.jymun.usanchaengyeo.data.model.forecast.Forecast" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center|bottom"
+        android:orientation="vertical"
+        tools:background="@drawable/app_content_background">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:autoSizeMaxTextSize="16sp"
+            android:autoSizeMinTextSize="10sp"
+            android:autoSizeStepGranularity="1sp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@{forecast.text}"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            tools:text="0" />
+
+        <com.jymun.usanchaengyeo.ui.custom_view.BarView
+            android:id="@+id/bar"
+            android:layout_width="@dimen/bar_width"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            app:bar_color="@color/white"
+            app:bar_max_height="@dimen/bar_max_height"
+            app:bar_max_value="@integer/forecast_max_value"
+            app:bar_min_height="@dimen/bar_min_height"
+            app:bar_min_value="@integer/forecast_min_value"
+            app:bar_radius="@dimen/bar_radius"
+            app:bar_stroke_width="@dimen/bar_stroke_width"
+            app:bar_value="@{forecast.value}"
+            tools:background="@color/white"
+            tools:layout_height="100dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:autoSizeMaxTextSize="16sp"
+            android:autoSizeMinTextSize="10sp"
+            android:autoSizeStepGranularity="1sp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@{forecast.time}"
+            android:textColor="@color/white"
+            tools:text="00시" />
+
+    </LinearLayout>
+</layout>

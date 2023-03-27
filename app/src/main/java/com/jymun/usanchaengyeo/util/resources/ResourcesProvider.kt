@@ -21,4 +21,6 @@ interface ResourcesProvider {
     fun getDrawableIdArray(@ArrayRes resId: Int): TypedArray
 
     fun getInteger(@IntegerRes resId: Int): Int
+
+    fun getIntegerArray(@ArrayRes resId: Int): IntArray
 }

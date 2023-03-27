@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="bar_radius">5dp</dimen>
+    <dimen name="bar_width">30dp</dimen>
+    <dimen name="bar_min_height">5dp</dimen>
+    <dimen name="bar_max_height">300dp</dimen>
+    <dimen name="bar_stroke_width">1dp</dimen>
+</resources>
