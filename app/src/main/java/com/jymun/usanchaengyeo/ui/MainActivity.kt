@@ -69,6 +69,7 @@ class MainActivity : BaseActivity<SearchAddressViewModel, ActivityMainBinding>()
         initAddressView()
         initFusedLocationProviderClient()
         initPermissionLauncher()
+        initToolbar()
         launchPermissionLauncher()
 
         viewModel.selectedAddress.observe(this) {
@@ -181,6 +182,15 @@ class MainActivity : BaseActivity<SearchAddressViewModel, ActivityMainBinding>()
         RequestPermissionDialog(onPositiveButtonClickListener).apply {
             isCancelable = true
             show(supportFragmentManager, tag)
+        }
+    }
+
+    private fun initToolbar() = binding.toolbar.apply {
+        setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.refresh -> submitAddress(viewModel.selectedAddress.value)
+            }
+            true
         }
     }
 
