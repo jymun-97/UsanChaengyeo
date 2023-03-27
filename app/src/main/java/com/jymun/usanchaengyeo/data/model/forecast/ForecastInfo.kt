@@ -10,4 +10,7 @@ data class ForecastInfo(
     val end: Int,
     val description: String,
     val comment: String
-) : Model(id, type)
+) : Model(id, type) {
+
+    val text: String = "$start ~ ${if (end == -1) "  " else end} : $description"
+}

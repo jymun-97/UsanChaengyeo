@@ -3,8 +3,10 @@ package com.jymun.usanchaengyeo.ui.forecast
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.jymun.usanchaengyeo.data.model.address.Address
 import com.jymun.usanchaengyeo.data.model.forecast.Forecast
+import com.jymun.usanchaengyeo.data.model.forecast.ForecastInfo
 import com.jymun.usanchaengyeo.databinding.FragmentForecastBinding
 import com.jymun.usanchaengyeo.ui.base.BaseFragment
 import com.jymun.usanchaengyeo.ui.base.adapter.ModelRecyclerAdapter
@@ -37,6 +39,7 @@ class ForecastFragment : BaseFragment<ForecastViewModel, FragmentForecastBinding
         super.onViewCreated(view, savedInstanceState)
 
         initForecastRecyclerView()
+        initForecastInfoRecyclerView()
 
         viewModel.forecastResult.observe(viewLifecycleOwner) { forecastList ->
             binding.commentTextView.text = forecastList?.let {
@@ -51,5 +54,12 @@ class ForecastFragment : BaseFragment<ForecastViewModel, FragmentForecastBinding
 
     private fun initForecastRecyclerView() = binding.forecastRecyclerView.apply {
         adapter = ModelRecyclerAdapter<Forecast>(resourcesProvider)
+    }
+
+    private fun initForecastInfoRecyclerView() = binding.forecastInfoRecyclerView.apply {
+        layoutManager = LinearLayoutManager(requireActivity())
+        adapter = ModelRecyclerAdapter<ForecastInfo>(resourcesProvider).apply {
+            submitList(forecastInfoHelper.get())
+        }
     }
 }
