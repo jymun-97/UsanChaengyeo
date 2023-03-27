@@ -10,4 +10,19 @@
     <string name="pin">고정</string>
     <string name="deleted_history">최근 검색 기록이 삭제되었습니다.</string>
     <string name="cancel">취소</string>
+    <string name="forecast_unit">단위 : mm</string>
+
+    <string name="forecast_description_1">비가 아예 내리지 않거나 체감을 못느끼는 정도</string>
+    <string name="forecast_description_2">육안으로 식별되나 물웅덩이는 생기지 않는 정도</string>
+    <string name="forecast_description_3">거세진 빗줄기가 확실히 보이고 물웅덩이가 생기는 정도</string>
+    <string name="forecast_description_4">우비를 입어도 옷이 젖기 쉽고 물웅덩이가 꽤 크게 생기는 정도</string>
+    <string name="forecast_description_5">우산이나 우비가 소용없고 시야 확보가 어려운 정도</string>
+    <string name="forecast_description_6">물통으로 퍼붓는 느낌이며 호우주의보에 가까운 정도</string>
+
+    <string name="forecast_comment_1">우산을 굳이 챙기지 않아도 괜찮아요!</string>
+    <string name="forecast_comment_2">우산을 챙기면 편할거에요!</string>
+    <string name="forecast_comment_3">우산이 꼭 필요해요!</string>
+    <string name="forecast_comment_4">우산을 써도 옷이 젖을 수 있어요!</string>
+    <string name="forecast_comment_5">우산을 써도 소용없을 정도로 비가 올거에요!</string>
+    <string name="forecast_comment_6">호우주의보가 내려질 수 있어요!</string>
 </resources>

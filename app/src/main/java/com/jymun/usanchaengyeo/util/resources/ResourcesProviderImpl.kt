@@ -33,6 +33,9 @@ class ResourcesProviderImpl @Inject constructor(
     override fun getDrawableIdArray(@ArrayRes resId: Int): TypedArray =
         context.resources.obtainTypedArray(resId)
 
-    override fun getInteger(resId: Int): Int = context.resources.getInteger(resId)
+    override fun getInteger(@IntegerRes resId: Int): Int = context.resources.getInteger(resId)
+
+    override fun getIntegerArray(@ArrayRes resId: Int): IntArray =
+        context.resources.getIntArray(resId)
 
 }

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="forecast_descriptions">
+        <item>@string/forecast_description_1</item>
+        <item>@string/forecast_description_2</item>
+        <item>@string/forecast_description_3</item>
+        <item>@string/forecast_description_4</item>
+        <item>@string/forecast_description_5</item>
+        <item>@string/forecast_description_6</item>
+    </string-array>
+
+    <string-array name="forecast_comments">
+        <item>@string/forecast_comment_1</item>
+        <item>@string/forecast_comment_2</item>
+        <item>@string/forecast_comment_3</item>
+        <item>@string/forecast_comment_4</item>
+        <item>@string/forecast_comment_5</item>
+        <item>@string/forecast_comment_6</item>
+    </string-array>
+
+    <integer-array name="forecast_info_starts">
+        <item>@integer/forecast_info_start_1</item>
+        <item>@integer/forecast_info_start_2</item>
+        <item>@integer/forecast_info_start_3</item>
+        <item>@integer/forecast_info_start_4</item>
+        <item>@integer/forecast_info_start_5</item>
+        <item>@integer/forecast_info_start_6</item>
+    </integer-array>
+
+    <integer-array name="forecast_info_ends">
+        <item>@integer/forecast_info_end_1</item>
+        <item>@integer/forecast_info_end_2</item>
+        <item>@integer/forecast_info_end_3</item>
+        <item>@integer/forecast_info_end_4</item>
+        <item>@integer/forecast_info_end_5</item>
+        <item>@integer/forecast_info_end_6</item>
+    </integer-array>
+</resources>
