@@ -2,7 +2,7 @@ package com.jymun.usanchaengyeo.ui.forecast
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jymun.usanchaengyeo.data.model.address.Address
 import com.jymun.usanchaengyeo.data.model.forecast.Forecast
@@ -24,13 +24,13 @@ class ForecastFragment : BaseFragment<ForecastViewModel, FragmentForecastBinding
     @Inject
     lateinit var forecastInfoHelper: ForecastInfoHelper
 
-    override val viewModel: ForecastViewModel by viewModels()
+    override val viewModel: ForecastViewModel by activityViewModels()
 
     override fun getViewDataBinding() = FragmentForecastBinding.inflate(layoutInflater)
 
     override fun setUpBinding() = binding.apply {
-        lifecycleOwner = viewLifecycleOwner
         viewModel = this@ForecastFragment.viewModel
+        lifecycleOwner = viewLifecycleOwner
     }
 
     override fun observeState() {}
