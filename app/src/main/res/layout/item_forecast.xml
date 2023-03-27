@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="forecast"
+            type="com.jymun.usanchaengyeo.data.model.forecast.Forecast" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center|bottom"
+        android:orientation="vertical"
+        tools:background="@drawable/app_content_background">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginHorizontal="20dp"
+            android:autoSizeMaxTextSize="16sp"
+            android:autoSizeMinTextSize="10sp"
+            android:autoSizeStepGranularity="1sp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@{forecast.text}"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            tools:text="0" />
+
+        <View
+            android:id="@+id/bar"
+            android:layout_width="30dp"
+            android:layout_height="5dp"
+            android:layout_marginVertical="10dp"
+            android:background="@color/white"
+            tools:background="@color/white" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginHorizontal="20dp"
+            android:autoSizeMaxTextSize="16sp"
+            android:autoSizeMinTextSize="10sp"
+            android:autoSizeStepGranularity="1sp"
+            android:autoSizeTextType="uniform"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@{forecast.time}"
+            android:textColor="@color/white"
+            tools:text="00시" />
+
+    </LinearLayout>
+</layout>
