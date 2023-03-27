@@ -189,6 +189,8 @@ class MainActivity : BaseActivity<SearchAddressViewModel, ActivityMainBinding>()
         setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.refresh -> submitAddress(viewModel.selectedAddress.value)
+
+                R.id.current_location -> updateCurrentLocation()
             }
             true
         }

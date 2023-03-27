@@ -2,8 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/current_location"
+        android:title="@string/current_location"
+        android:icon="@drawable/ic_location_filled"
+        app:showAsAction="ifRoom"/>
+
+    <item
         android:id="@+id/refresh"
         android:title="@string/refresh"
         android:icon="@drawable/ic_refresh"
-        app:showAsAction="always"/>
+        app:showAsAction="ifRoom"/>
 </menu>

@@ -6,6 +6,7 @@
     <string name="loading_address">현재 위치를 불러오고 있습니다.</string>
     <string name="location_permission_not_granted">위치 접근 권한이 거부되어 있습니다.</string>
     <string name="refresh">새로고침</string>
+    <string name="current_location">현재 위치로 설정</string>
     <string name="delete">삭제</string>
     <string name="pin">고정</string>
     <string name="deleted_history">최근 검색 기록이 삭제되었습니다.</string>
