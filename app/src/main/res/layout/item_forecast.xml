@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -18,7 +19,7 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:autoSizeMaxTextSize="16sp"
             android:autoSizeMinTextSize="10sp"
@@ -31,17 +32,25 @@
             android:textSize="14sp"
             tools:text="0" />
 
-        <View
+        <com.jymun.usanchaengyeo.ui.custom_view.BarView
             android:id="@+id/bar"
-            android:layout_width="30dp"
-            android:layout_height="5dp"
+            android:layout_width="@dimen/bar_width"
+            android:layout_height="wrap_content"
             android:layout_marginVertical="10dp"
-            android:background="@color/white"
-            tools:background="@color/white" />
+            app:bar_color="@color/white"
+            app:bar_max_height="@dimen/bar_max_height"
+            app:bar_max_value="@integer/forecast_max_value"
+            app:bar_min_height="@dimen/bar_min_height"
+            app:bar_min_value="@integer/forecast_min_value"
+            app:bar_radius="@dimen/bar_radius"
+            app:bar_stroke_width="@dimen/bar_stroke_width"
+            app:bar_value="@{forecast.value}"
+            tools:background="@color/white"
+            tools:layout_height="100dp" />
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:autoSizeMaxTextSize="16sp"
             android:autoSizeMinTextSize="10sp"

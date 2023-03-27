@@ -26,6 +26,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
             tools:text="comment text" />
 
         <TextView
@@ -39,7 +40,8 @@
             android:textColor="@color/gray"
             android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@id/forecastRecyclerView"
-            app:layout_constraintEnd_toEndOf="@id/forecastRecyclerView" />
+            app:layout_constraintEnd_toEndOf="@id/forecastRecyclerView"
+            app:layout_constraintVertical_bias="1" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/forecastRecyclerView"
@@ -47,19 +49,21 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="20dp"
+            android:maxHeight="350dp"
             app:items="@{viewModel.forecastResult}"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toTopOf="@id/line"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:spanCount="6" />
+            app:spanCount="6"
+            tools:layout_height="350dp" />
 
         <View
             android:id="@+id/line"
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_marginBottom="20dp"
-            android:background="@color/gray_dark"
+            android:background="@color/gray"
             app:layout_constraintBottom_toTopOf="@id/forecastInfoRecyclerView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

@@ -22,5 +22,5 @@ data class Forecast(
         else -> forecastValue.dropLast(4).toInt()
     }
 
-    val text: String = if (value == 0 || value > 50) value.toString() else "${value}▲"
+    val text: String = if (value in 0 until 30) value.toString() else "$value ▲"
 }

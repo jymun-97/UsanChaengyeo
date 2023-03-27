@@ -35,4 +35,13 @@
         <item>@integer/forecast_info_end_5</item>
         <item>@integer/forecast_info_end_6</item>
     </integer-array>
+
+    <integer-array name="forecast_colors">
+        <item>@color/white</item>
+        <item>@color/green</item>
+        <item>@color/yellow</item>
+        <item>@color/red</item>
+        <item>@color/purple</item>
+        <item>@color/blue</item>
+    </integer-array>
 </resources>

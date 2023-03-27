@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="BarView">
+        <attr name="bar_value" format="integer" />
+        <attr name="bar_min_value" format="integer" />
+        <attr name="bar_max_value" format="integer" />
+        <attr name="bar_color" format="color" />
+        <attr name="bar_min_height" format="dimension" />
+        <attr name="bar_max_height" format="dimension" />
+        <attr name="bar_radius" format="dimension" />
+        <attr name="bar_stroke_width" format="dimension" />
+    </declare-styleable>
+</resources>
