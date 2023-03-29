@@ -48,7 +48,7 @@ class ForecastFragment : BaseFragment<ForecastViewModel, FragmentForecastBinding
         }
     }
 
-    fun submitSelectedAddress(address: Address?) {
+    fun submitSelectedAddress(address: Address) {
         viewModel.runForecast(address)
     }
 

@@ -27,4 +27,5 @@ object Versions {
     const val NAVIGATION = "2.5.3"
     const val ROOM = "2.4.3"
     const val SWIPE_HELPER = "1.4"
+    const val SPIN_KIT = "1.4.0"
 }

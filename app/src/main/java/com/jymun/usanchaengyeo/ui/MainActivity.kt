@@ -94,12 +94,12 @@ class MainActivity : BaseActivity<SearchAddressViewModel, ActivityMainBinding>()
     }
 
     private fun submitAddress(address: Address?) {
+        address?.let { forecastFragment.submitSelectedAddress(it) }
         binding.addressView.submitAddress(
             newAddress = address,
             stateText = address?.let { null }
                 ?: resourcesProvider.getString(R.string.loading_address)
         )
-        forecastFragment.submitSelectedAddress(address)
     }
 
     private fun replaceFragment(searchKeyword: String?) {
