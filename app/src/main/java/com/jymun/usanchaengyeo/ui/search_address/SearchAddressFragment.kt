@@ -2,12 +2,14 @@ package com.jymun.usanchaengyeo.ui.search_address
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jymun.usanchaengyeo.data.model.address.Address
 import com.jymun.usanchaengyeo.databinding.FragmentSearchAddressBinding
 import com.jymun.usanchaengyeo.ui.base.BaseFragment
+import com.jymun.usanchaengyeo.ui.base.LoadState
 import com.jymun.usanchaengyeo.ui.base.adapter.ModelRecyclerAdapter
 import com.jymun.usanchaengyeo.ui.search_address.address.AddressAdapterListener
 import com.jymun.usanchaengyeo.util.resources.ResourcesProvider
@@ -29,7 +31,15 @@ class SearchAddressFragment : BaseFragment<SearchAddressViewModel, FragmentSearc
         lifecycleOwner = viewLifecycleOwner
     }
 
-    override fun observeState() {}
+    override fun observeState() = viewModel.loadState.observe(viewLifecycleOwner) {
+        if (it is LoadState.Error) {
+            Toast.makeText(
+                requireActivity(),
+                resourcesProvider.getString(it.exception.messageResId),
+                Toast.LENGTH_LONG
+            ).show()
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

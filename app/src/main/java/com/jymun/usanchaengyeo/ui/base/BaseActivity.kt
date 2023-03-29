@@ -20,6 +20,8 @@ abstract class BaseActivity<VM : BaseViewModel, B : ViewDataBinding> : AppCompat
         setContentView(binding.root)
 
         setUpBinding()
+        observeState()
+
         weatherView = getWeatherViewInstance()
     }
 
@@ -37,5 +39,8 @@ abstract class BaseActivity<VM : BaseViewModel, B : ViewDataBinding> : AppCompat
 
     abstract fun getViewDataBinding(): B
 
+    abstract fun observeState()
+
     abstract fun getWeatherViewInstance(): WeatherView
+
 }

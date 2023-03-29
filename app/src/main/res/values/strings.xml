@@ -26,4 +26,8 @@
     <string name="forecast_comment_4">우산을 써도 옷이 젖을 수 있어요!</string>
     <string name="forecast_comment_5">우산을 써도 소용없을 정도로 비가 올거에요!</string>
     <string name="forecast_comment_6">호우주의보가 내려질 수 있어요!</string>
+
+    <string name="fail_to_connect_network_exception_message">네트워크 연결이 원활하지 않습니다.</string>
+    <string name="fail_to_connect_server_exception_message">서버와의 연결이 원활하지 않습니다. 다시 시도해 주세요.</string>
+    <string name="fail_to_load_current_location_exception_message">현재 위치를 불러오는 데 실패했습니다.</string>
 </resources>
