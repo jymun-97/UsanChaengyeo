@@ -4,6 +4,7 @@ import com.jymun.usanchaengyeo.data.model.ModelType
 import com.jymun.usanchaengyeo.data.model.address.Address
 import com.jymun.usanchaengyeo.data.repository.address.AddressRepository
 import com.jymun.usanchaengyeo.util.dispatcher.DispatcherProvider
+import com.jymun.usanchaengyeo.util.exception.CustomExceptions
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -23,7 +24,7 @@ class CoordinateToAddressUseCase @Inject constructor(
         val addressEntityList = addressRepository.searchAddress(addressName.addressName)
 
         if (addressEntityList.isEmpty()) {
-
+            throw CustomExceptions.FailToLoadCurrentLocationException
         }
 
         val entity = addressEntityList.first()
