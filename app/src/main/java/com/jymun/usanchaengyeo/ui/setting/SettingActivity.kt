@@ -3,14 +3,14 @@ package com.jymun.usanchaengyeo.ui.setting
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
-import com.github.matteobattilana.weather.PrecipType
 import com.github.matteobattilana.weather.WeatherView
 import com.jymun.usanchaengyeo.R
 import com.jymun.usanchaengyeo.databinding.ActivitySettingBinding
 import com.jymun.usanchaengyeo.ui.base.BaseActivity
+import com.jymun.usanchaengyeo.ui.setting.weather.WeatherAdapter
+import com.jymun.usanchaengyeo.ui.setting.weather.WeatherData
 import com.jymun.usanchaengyeo.util.resources.ResourcesProvider
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -57,7 +57,7 @@ class SettingActivity : BaseActivity<SettingViewModel, ActivitySettingBinding>()
     }
 
     private fun initSizeSlider() = binding.sizeSlider.apply {
-        addOnChangeListener { slider, value, _ ->
+        addOnChangeListener { _, value, _ ->
             binding.weatherView.scaleFactor = 1 + value * 0.03f
         }
     }
@@ -69,10 +69,10 @@ class SettingActivity : BaseActivity<SettingViewModel, ActivitySettingBinding>()
     }
 
     private fun initSetWeatherSpinner() = binding.setWeatherSpinner.apply {
-        adapter = ArrayAdapter.createFromResource(
-            this@SettingActivity,
-            R.array.weather_names,
-            androidx.appcompat.R.layout.support_simple_spinner_dropdown_item
+        dropDownVerticalOffset = 150
+        adapter = WeatherAdapter(
+            resourcesProvider,
+            WeatherData.values
         )
         onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -83,15 +83,15 @@ class SettingActivity : BaseActivity<SettingViewModel, ActivitySettingBinding>()
                 position: Int,
                 id: Long
             ) {
-                when (position) {
-
-                    0 -> binding.weatherView.precipType = PrecipType.RAIN
-
-                    1 -> binding.weatherView.precipType = PrecipType.SNOW
-
-                    else -> binding.weatherView.precipType = PrecipType.CLEAR
-                }
+                bindWeatherData(adapter.getItem(position) as WeatherData)
             }
         }
+    }
+
+    private fun bindWeatherData(weatherData: WeatherData) = binding.apply {
+        weatherView.precipType = weatherData.weather
+        speedSlider.value = weatherData.defaultSpeed
+        sizeSlider.value = weatherData.defaultSize
+        amountSlider.value = weatherData.defaultAmount
     }
 }
