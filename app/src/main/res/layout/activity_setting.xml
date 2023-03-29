@@ -16,6 +16,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="20dp"
+            android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -57,23 +58,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/settingHeaderTextView" />
 
-        <TextSwitcher
-            android:id="@+id/weatherTextSwitcher"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="24dp"
-            app:layout_constraintDimensionRatio="5:3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/divider" />
-
         <TextView
             android:id="@+id/setWeatherTextView"
             style="@style/SettingLabelTextViewStyle"
             android:text="무엇을 내릴까요?"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/weatherTextSwitcher" />
+            app:layout_constraintTop_toBottomOf="@id/divider" />
 
         <Spinner
             android:id="@+id/setWeatherSpinner"
@@ -93,11 +84,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/setWeatherSpinner" />
 
-        <SeekBar
-            android:id="@+id/speedSeekbar"
-            style="@style/SettingSeekbarStyle"
-            android:progressBackgroundTint="@color/white"
-            android:thumbTint="@color/white"
+        <com.google.android.material.slider.Slider
+            android:id="@+id/speedSlider"
+            style="@style/SettingSliderStyle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/speedTextView" />
@@ -108,11 +97,11 @@
             android:text="얼마나 크게 내릴까요?"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/speedSeekbar" />
+            app:layout_constraintTop_toBottomOf="@id/speedSlider" />
 
-        <SeekBar
-            android:id="@+id/sizeSeekbar"
-            style="@style/SettingSeekbarStyle"
+        <com.google.android.material.slider.Slider
+            android:id="@+id/sizeSlider"
+            style="@style/SettingSliderStyle"
             android:progressBackgroundTint="@color/white"
             android:thumbTint="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
@@ -125,11 +114,11 @@
             android:text="얼마나 많이 내릴까요?"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/sizeSeekbar" />
+            app:layout_constraintTop_toBottomOf="@id/sizeSlider" />
 
-        <SeekBar
-            android:id="@+id/amountSeekbar"
-            style="@style/SettingSeekbarStyle"
+        <com.google.android.material.slider.Slider
+            android:id="@+id/amountSlider"
+            style="@style/SettingSliderStyle"
             android:progressBackgroundTint="@color/white"
             android:thumbTint="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
