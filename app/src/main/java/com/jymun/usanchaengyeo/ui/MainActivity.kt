@@ -32,6 +32,7 @@ import com.jymun.usanchaengyeo.ui.base.LoadState
 import com.jymun.usanchaengyeo.ui.forecast.ForecastFragment
 import com.jymun.usanchaengyeo.ui.history.OnHistorySelectedListener
 import com.jymun.usanchaengyeo.ui.search_address.SearchAddressViewModel
+import com.jymun.usanchaengyeo.ui.setting.SettingActivity
 import com.jymun.usanchaengyeo.util.exception.CustomExceptions
 import com.jymun.usanchaengyeo.util.resources.ResourcesProvider
 import dagger.hilt.android.AndroidEntryPoint
@@ -118,6 +119,10 @@ class MainActivity : BaseActivity<SearchAddressViewModel, ActivityMainBinding>()
 
     private fun initToolbar() {
         setSupportActionBar(binding.toolbar)
+        binding.toolbar.setNavigationOnClickListener {
+            startActivity(Intent(this, SettingActivity::class.java))
+            overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out)
+        }
     }
 
     private fun replaceFragment(searchKeyword: String?) {
