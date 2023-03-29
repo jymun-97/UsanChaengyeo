@@ -44,4 +44,7 @@ object Dependencies {
     // RecyclerView Swipe Helper
     const val SWIPE_HELPER =
         "it.xabaras.android:recyclerview-swipedecorator:${Versions.SWIPE_HELPER}"
+
+    // Spin Kit
+    const val SPIN_KIT = "com.github.ybq:Android-SpinKit:${Versions.SPIN_KIT}"
 }

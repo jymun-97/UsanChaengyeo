@@ -99,6 +99,9 @@ dependencies {
 
     // RecyclerView Swipe Helper
     implementation(Dependencies.SWIPE_HELPER)
+
+    // Spin Kit
+    implementation(Dependencies.SPIN_KIT)
 }
 
 kapt {
