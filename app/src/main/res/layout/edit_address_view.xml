@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/shape_white_round_rectangle"
     android:padding="10dp"
-    tools:background="@drawable/app_content_background">
+    tools:background="@drawable/app_background">
 
     <ImageView
         android:id="@+id/addressImageView"
