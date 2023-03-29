@@ -1,6 +1,7 @@
 package com.jymun.usanchaengyeo.ui.base
 
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
 import com.github.matteobattilana.weather.PrecipType
@@ -23,6 +24,7 @@ abstract class BaseActivity<VM : BaseViewModel, B : ViewDataBinding> : AppCompat
         observeState()
 
         weatherView = getWeatherViewInstance()
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
     }
 
     override fun onStart() {

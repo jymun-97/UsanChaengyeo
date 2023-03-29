@@ -21,4 +21,23 @@
         <item name="endIconMode">clear_text</item>
         <item name="endIconTint">@color/white</item>
     </style>
+
+    <style name="SettingLabelTextViewStyle">
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_marginTop">24dp</item>
+        <item name="android:layout_marginHorizontal">24dp</item>
+        <item name="android:textColor">@color/gray_light</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="SettingSeekbarStyle">
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginHorizontal">10dp</item>
+        <item name="android:progressTint">@color/white</item>
+        <item name="android:min">0</item>
+        <item name="android:max">100</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
 </resources>
