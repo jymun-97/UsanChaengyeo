@@ -1,11 +1,16 @@
 package com.jymun.usanchaengyeo.ui.search_address
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.jymun.usanchaengyeo.R
 import com.jymun.usanchaengyeo.data.model.address.Address
 import com.jymun.usanchaengyeo.databinding.FragmentSearchAddressBinding
 import com.jymun.usanchaengyeo.ui.base.BaseFragment
@@ -64,4 +69,24 @@ class SearchAddressFragment : BaseFragment<SearchAddressViewModel, FragmentSearc
     private fun moveToForecastFragment() = findNavController().navigate(
         SearchAddressFragmentDirections.actionFragmentSearchAddressToFragmentForecast()
     )
+
+    override val menuProvider = object : MenuProvider {
+        override fun onPrepareMenu(menu: Menu) {
+            menu.findItem(R.id.refresh).isVisible = false
+        }
+
+        override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+            menuInflater.inflate(R.menu.toolbar_menu, menu)
+        }
+
+        override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+            if (menuItem.itemId == R.id.current_location) {
+                onCurrentLocationRequiredListener?.onCurrentLocationRequired()
+                moveToForecastFragment()
+
+                return true
+            }
+            return false
+        }
+    }
 }

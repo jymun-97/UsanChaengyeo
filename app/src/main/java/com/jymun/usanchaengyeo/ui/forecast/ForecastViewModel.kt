@@ -16,13 +16,26 @@ class ForecastViewModel @Inject constructor(
     private val forecastUseCase: ForecastUseCase
 ) : BaseViewModel(dispatcherProvider) {
 
+    private val selectedAddress = MutableLiveData<Address>()
+
     private val _forecastResult = MutableLiveData<List<Forecast>?>()
     val forecastResult: LiveData<List<Forecast>?>
         get() = _forecastResult
 
     fun runForecast(address: Address) = onMainDispatcher {
+        selectedAddress.postValue(address)
         _forecastResult.postValue(
             forecastUseCase(address)
         )
+    }
+
+    fun runForecast(onSelectedAddressNotExisted: () -> Unit) = onMainDispatcher {
+        selectedAddress.value?.let {
+            _forecastResult.postValue(
+                forecastUseCase(it)
+            )
+        } ?: run {
+            onSelectedAddressNotExisted()
+        }
     }
 }

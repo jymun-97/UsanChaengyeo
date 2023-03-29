@@ -39,13 +39,14 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<SearchAddressViewModel, ActivityMainBinding>(),
-    OnHistorySelectedListener {
+    OnHistorySelectedListener, OnCurrentLocationRequiredListener {
 
     @Inject
     lateinit var resourcesProvider: ResourcesProvider
 
     private lateinit var permissionLauncher: ActivityResultLauncher<Array<String>>
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    private lateinit var navHost: NavHostFragment
     private lateinit var navController: NavController
     private lateinit var forecastFragment: ForecastFragment
 
@@ -74,9 +75,9 @@ class MainActivity : BaseActivity<SearchAddressViewModel, ActivityMainBinding>()
 
         initNavigation()
         initAddressView()
+        initToolbar()
         initFusedLocationProviderClient()
         initPermissionLauncher()
-        initToolbar()
         launchPermissionLauncher()
 
         viewModel.selectedAddress.observe(this) {
@@ -92,7 +93,7 @@ class MainActivity : BaseActivity<SearchAddressViewModel, ActivityMainBinding>()
     }
 
     private fun initNavigation() {
-        val navHost =
+        navHost =
             supportFragmentManager.findFragmentById(binding.fragmentContainerView.id) as NavHostFragment
 
         navController = navHost.navController
@@ -113,6 +114,10 @@ class MainActivity : BaseActivity<SearchAddressViewModel, ActivityMainBinding>()
             newAddress = address,
             stateText = stateText
         )
+    }
+
+    private fun initToolbar() {
+        setSupportActionBar(binding.toolbar)
     }
 
     private fun replaceFragment(searchKeyword: String?) {
@@ -195,25 +200,6 @@ class MainActivity : BaseActivity<SearchAddressViewModel, ActivityMainBinding>()
         }
     }
 
-    private fun initToolbar() = binding.toolbar.apply {
-        setOnMenuItemClickListener { item ->
-            when (item.itemId) {
-                R.id.refresh -> {
-                    viewModel.selectedAddress.value?.let { address ->
-                        submitAddress(
-                            address = address,
-                            stateText = null
-                        )
-                    } ?: run {
-                        updateCurrentLocation()
-                    }
-                }
-                R.id.current_location -> updateCurrentLocation()
-            }
-            true
-        }
-    }
-
     private fun launchPermissionLauncher() = permissionLauncher.launch(REQUIRED_PERMISSIONS)
 
     override fun dispatchTouchEvent(event: MotionEvent?): Boolean {
@@ -245,5 +231,9 @@ class MainActivity : BaseActivity<SearchAddressViewModel, ActivityMainBinding>()
             FINE_LOCATION_PERMISSION,
             COURSE_LOCATION_PERMISSION
         )
+    }
+
+    override fun onCurrentLocationRequired() {
+        updateCurrentLocation()
     }
 }
