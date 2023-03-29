@@ -3,11 +3,11 @@ package com.jymun.usanchaengyeo.ui.search_address
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.switchMap
-import com.jymun.harusekki.ui.base.BaseViewModel
 import com.jymun.usanchaengyeo.data.model.address.Address
 import com.jymun.usanchaengyeo.domain.address.CoordinateToAddressUseCase
 import com.jymun.usanchaengyeo.domain.address.SearchAddressUseCase
 import com.jymun.usanchaengyeo.domain.history.AddHistoryUseCase
+import com.jymun.usanchaengyeo.ui.base.BaseViewModel
 import com.jymun.usanchaengyeo.util.dispatcher.DispatcherProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

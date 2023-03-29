@@ -5,6 +5,10 @@
 
     <data>
 
+        <import type="com.jymun.usanchaengyeo.ui.base.LoadState" />
+
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.jymun.usanchaengyeo.ui.forecast.ForecastViewModel" />
@@ -23,6 +27,7 @@
             android:gravity="center"
             android:textColor="@color/white"
             android:textSize="24sp"
+            android:visibility="@{viewModel.loadState instanceof LoadState.Loading ? View.GONE : View.VISIBLE}"
             app:layout_constraintBottom_toTopOf="@id/forecastUnitTextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -40,6 +45,7 @@
             android:text="@string/forecast_unit"
             android:textColor="@color/gray"
             android:textSize="12sp"
+            android:visibility="@{viewModel.loadState instanceof LoadState.Loading ? View.GONE : View.VISIBLE}"
             app:layout_constraintBottom_toTopOf="@id/forecastRecyclerView"
             app:layout_constraintEnd_toEndOf="@id/forecastRecyclerView"
             app:layout_constraintVertical_bias="1" />
@@ -78,6 +84,18 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/loadingView"
+            style="@style/SpinKitView.WanderingCubes"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:visibility="@{viewModel.loadState instanceof LoadState.Loading ? View.VISIBLE : View.GONE}"
+            app:SpinKit_Color="@color/white"
+            app:layout_constraintBottom_toTopOf="@id/line"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
