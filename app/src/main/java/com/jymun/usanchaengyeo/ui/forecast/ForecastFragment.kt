@@ -2,6 +2,7 @@ package com.jymun.usanchaengyeo.ui.forecast
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jymun.usanchaengyeo.data.model.address.Address
@@ -9,6 +10,7 @@ import com.jymun.usanchaengyeo.data.model.forecast.Forecast
 import com.jymun.usanchaengyeo.data.model.forecast.ForecastInfo
 import com.jymun.usanchaengyeo.databinding.FragmentForecastBinding
 import com.jymun.usanchaengyeo.ui.base.BaseFragment
+import com.jymun.usanchaengyeo.ui.base.LoadState
 import com.jymun.usanchaengyeo.ui.base.adapter.ModelRecyclerAdapter
 import com.jymun.usanchaengyeo.util.forecast.ForecastInfoHelper
 import com.jymun.usanchaengyeo.util.resources.ResourcesProvider
@@ -33,7 +35,15 @@ class ForecastFragment : BaseFragment<ForecastViewModel, FragmentForecastBinding
         lifecycleOwner = viewLifecycleOwner
     }
 
-    override fun observeState() {}
+    override fun observeState() = viewModel.loadState.observe(viewLifecycleOwner) {
+        if (it is LoadState.Error) {
+            Toast.makeText(
+                requireActivity(),
+                resourcesProvider.getString(it.exception.messageResId),
+                Toast.LENGTH_LONG
+            ).show()
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
