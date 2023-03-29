@@ -9,7 +9,6 @@ import android.graphics.Rect
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
-import android.util.Log
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -29,14 +28,13 @@ import com.jymun.usanchaengyeo.data.model.address.Address
 import com.jymun.usanchaengyeo.data.model.history.History
 import com.jymun.usanchaengyeo.databinding.ActivityMainBinding
 import com.jymun.usanchaengyeo.ui.base.BaseActivity
+import com.jymun.usanchaengyeo.ui.base.LoadState
 import com.jymun.usanchaengyeo.ui.forecast.ForecastFragment
 import com.jymun.usanchaengyeo.ui.history.OnHistorySelectedListener
 import com.jymun.usanchaengyeo.ui.search_address.SearchAddressViewModel
+import com.jymun.usanchaengyeo.util.exception.CustomExceptions
 import com.jymun.usanchaengyeo.util.resources.ResourcesProvider
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -62,6 +60,15 @@ class MainActivity : BaseActivity<SearchAddressViewModel, ActivityMainBinding>()
         lifecycleOwner = this@MainActivity
     }
 
+    override fun observeState() = viewModel.loadState.observe(this) {
+        if (it is LoadState.Error) {
+            submitAddress(
+                address = null,
+                stateText = resourcesProvider.getString(it.exception.messageResId)
+            )
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -73,7 +80,11 @@ class MainActivity : BaseActivity<SearchAddressViewModel, ActivityMainBinding>()
         launchPermissionLauncher()
 
         viewModel.selectedAddress.observe(this) {
-            submitAddress(it)
+            submitAddress(
+                address = it,
+                stateText = it?.let { null }
+                    ?: resourcesProvider.getString(R.string.loading_address)
+            )
         }
         viewModel.searchKeyword.observe(this) { searchKeyword ->
             replaceFragment(searchKeyword)
@@ -93,12 +104,14 @@ class MainActivity : BaseActivity<SearchAddressViewModel, ActivityMainBinding>()
         replaceFragment(searchKeyword)
     }
 
-    private fun submitAddress(address: Address?) {
+    private fun submitAddress(
+        address: Address?,
+        stateText: String?
+    ) {
         address?.let { forecastFragment.submitSelectedAddress(it) }
         binding.addressView.submitAddress(
             newAddress = address,
-            stateText = address?.let { null }
-                ?: resourcesProvider.getString(R.string.loading_address)
+            stateText = stateText
         )
     }
 
@@ -139,9 +152,7 @@ class MainActivity : BaseActivity<SearchAddressViewModel, ActivityMainBinding>()
         }
         else -> {
             showRequestPermissionDialog() { moveToApplicationDetailsSettings() }
-            binding.addressView.submitAddress(
-                stateText = resourcesProvider.getString(R.string.location_permission_not_granted)
-            )
+            viewModel.exceptionCaused(CustomExceptions.NotGrantedLocationPermissions)
         }
     }
 
@@ -151,11 +162,10 @@ class MainActivity : BaseActivity<SearchAddressViewModel, ActivityMainBinding>()
             Priority.PRIORITY_HIGH_ACCURACY,
             null
         ).addOnSuccessListener { location ->
-            CoroutineScope(Dispatchers.IO).launch {
-                viewModel.coordinateToAddress(location.longitude, location.latitude)
-            }
+            submitAddress(null, resourcesProvider.getString(R.string.loading_address))
+            viewModel.coordinateToAddress(location.longitude, location.latitude)
         }.addOnFailureListener {
-            Log.d("# MainActivity", "$it")
+            viewModel.exceptionCaused(CustomExceptions.FailToLoadCurrentLocationException)
         }
     }
 
@@ -188,8 +198,16 @@ class MainActivity : BaseActivity<SearchAddressViewModel, ActivityMainBinding>()
     private fun initToolbar() = binding.toolbar.apply {
         setOnMenuItemClickListener { item ->
             when (item.itemId) {
-                R.id.refresh -> submitAddress(viewModel.selectedAddress.value)
-
+                R.id.refresh -> {
+                    viewModel.selectedAddress.value?.let { address ->
+                        submitAddress(
+                            address = address,
+                            stateText = null
+                        )
+                    } ?: run {
+                        updateCurrentLocation()
+                    }
+                }
                 R.id.current_location -> updateCurrentLocation()
             }
             true
