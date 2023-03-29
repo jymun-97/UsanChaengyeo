@@ -2,7 +2,11 @@ package com.jymun.usanchaengyeo.ui.history
 
 import android.content.Context
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -87,5 +91,25 @@ class HistoryFragment : BaseFragment<HistoryViewModel, FragmentHistoryBinding>()
             )
         )
         historyItemTouchHelper.attachToRecyclerView(binding.historyRecyclerView)
+    }
+
+    override val menuProvider = object : MenuProvider {
+        override fun onPrepareMenu(menu: Menu) {
+            menu.findItem(R.id.refresh).isVisible = false
+        }
+
+        override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+            menuInflater.inflate(R.menu.toolbar_menu, menu)
+        }
+
+        override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+            if (menuItem.itemId == R.id.current_location) {
+                onCurrentLocationRequiredListener?.onCurrentLocationRequired()
+                moveToForecastFragment()
+
+                return true
+            }
+            return false
+        }
     }
 }
