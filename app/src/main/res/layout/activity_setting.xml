@@ -4,6 +4,9 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.jymun.usanchaengyeo.ui.setting.SettingViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
