@@ -6,6 +6,8 @@ import com.jymun.usanchaengyeo.data.source.forecast.ForecastDataSource
 import com.jymun.usanchaengyeo.data.source.forecast.ForecastRemoteDataSource
 import com.jymun.usanchaengyeo.data.source.history.HistoryDataSource
 import com.jymun.usanchaengyeo.data.source.history.HistoryLocalDataSource
+import com.jymun.usanchaengyeo.data.source.weather.WeatherPreferencesDataSource
+import com.jymun.usanchaengyeo.data.source.weather.WeatherPreferencesLocalDataSource
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -33,4 +35,10 @@ abstract class DataSourceModule {
     abstract fun bindsForecastDataSource(
         forecastRemoteDataSource: ForecastRemoteDataSource
     ): ForecastDataSource
+
+    @Binds
+    @Singleton
+    abstract fun bindsWeatherPreferencesDataSource(
+        weatherPreferencesLocalDataSource: WeatherPreferencesLocalDataSource
+    ): WeatherPreferencesDataSource
 }
