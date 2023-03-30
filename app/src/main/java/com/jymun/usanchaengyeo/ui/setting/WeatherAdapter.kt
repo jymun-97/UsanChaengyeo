@@ -1,4 +1,4 @@
-package com.jymun.usanchaengyeo.ui.setting.weather
+package com.jymun.usanchaengyeo.ui.setting
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import com.jymun.usanchaengyeo.R
+import com.jymun.usanchaengyeo.data.model.weather.WeatherData
 import com.jymun.usanchaengyeo.databinding.ItemWeatherBinding
 import com.jymun.usanchaengyeo.util.resources.ResourcesProvider
 
