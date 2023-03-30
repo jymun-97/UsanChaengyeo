@@ -23,5 +23,9 @@ sealed class CustomExceptions(
         R.string.location_permission_not_granted
     )
 
+    object FailToLoadWeatherPreferences : CustomExceptions(
+        R.string.fail_to_load_weather_preferences_exception_message
+    )
+
     class UnknownException(message: String) : CustomExceptions(0)
 }
