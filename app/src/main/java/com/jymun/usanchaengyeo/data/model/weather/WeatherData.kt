@@ -79,5 +79,13 @@ sealed class WeatherData(
             Snow(),
             Clear
         )
+
+        fun defaultOf(weather: PrecipType) = when (weather) {
+            PrecipType.RAIN -> Rain()
+
+            PrecipType.SNOW -> Snow()
+
+            else -> Clear
+        }
     }
 }

@@ -70,5 +70,13 @@ class SettingViewModel @Inject constructor(
         _weatherData.postValue(new)
         updateWeatherDataUseCase(new)
     }
+
+    fun loadDefaultWeatherData() = onMainDispatcher {
+        val old = weatherData.value ?: return@onMainDispatcher
+        val new = WeatherData.defaultOf(old.weather)
+
+        _weatherData.postValue(new)
+        updateWeatherDataUseCase(new)
+    }
 }
 
