@@ -1,4 +1,5 @@
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+import com.google.protobuf.gradle.*
 
 plugins {
     id(Plugins.ANDROID_APPLICATION)
@@ -6,6 +7,7 @@ plugins {
     id(Plugins.KAPT)
     id(Plugins.HILT)
     id(Plugins.NAVIGATION_SAFE_ARGS)
+    id(Plugins.PROTO_DATASTORE)
 }
 
 val addressServiceKey: String = gradleLocalProperties(rootDir).getProperty("address_service_key")
@@ -102,8 +104,27 @@ dependencies {
 
     // Spin Kit
     implementation(Dependencies.SPIN_KIT)
+
+    // Proto DataStore
+    implementation(Dependencies.DATASTORE)
+    implementation(Dependencies.PROTO_DATASTORE)
 }
 
 kapt {
     correctErrorTypes = true
+}
+
+protobuf {
+    protoc {
+        artifact = Dependencies.PROTOC
+    }
+    generateProtoTasks {
+        all().forEach { task ->
+            task.builtins {
+                id("java") {
+                    option("lite")
+                }
+            }
+        }
+    }
 }
