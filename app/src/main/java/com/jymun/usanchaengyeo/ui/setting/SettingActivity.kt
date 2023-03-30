@@ -1,7 +1,6 @@
 package com.jymun.usanchaengyeo.ui.setting
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
@@ -45,6 +44,11 @@ class SettingActivity : BaseActivity<SettingViewModel, ActivitySettingBinding>()
         }
     }
 
+    override fun observeWeatherData() = viewModel.weatherData.observe(this) {
+        val weatherData = it ?: return@observe
+        bindViewsWithWeatherData(weatherData)
+    }
+
     override fun getWeatherViewInstance(): WeatherView = binding.weatherView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,14 +59,6 @@ class SettingActivity : BaseActivity<SettingViewModel, ActivitySettingBinding>()
         initSizeSlider()
         initAmountSlider()
         initSetWeatherSpinner()
-
-        viewModel.loadWeatherData()
-        viewModel.weatherData.observe(this) {
-            val data = it ?: return@observe
-
-            Log.d("# SettingActivity", "$data")
-            bindViewsWithWeatherData(data)
-        }
     }
 
     private val backPressedCallback = object : OnBackPressedCallback(true) {
@@ -70,6 +66,10 @@ class SettingActivity : BaseActivity<SettingViewModel, ActivitySettingBinding>()
             finish()
             overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out)
         }
+    }
+
+    override fun loadWeatherData() {
+        viewModel.loadWeatherData()
     }
 
     private fun initSpeedSlider() = binding.speedSlider.apply {
@@ -114,13 +114,6 @@ class SettingActivity : BaseActivity<SettingViewModel, ActivitySettingBinding>()
         bindWeatherView(weatherData)
         bindSliders(weatherData)
         bindSpinner(weatherData)
-    }
-
-    private fun bindWeatherView(weatherData: WeatherData) = binding.weatherView.apply {
-        precipType = weatherData.weather
-        speed = weatherData.speed.toInt() * 20
-        scaleFactor = 1 + weatherData.size * 0.03f
-        emissionRate = weatherData.amount
     }
 
     private fun bindSliders(weatherData: WeatherData) = binding.apply {

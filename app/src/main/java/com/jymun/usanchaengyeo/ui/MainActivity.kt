@@ -71,6 +71,11 @@ class MainActivity : BaseActivity<SearchAddressViewModel, ActivityMainBinding>()
         }
     }
 
+    override fun observeWeatherData() = viewModel.weatherData.observe(this) {
+        val weatherData = it ?: return@observe
+        bindWeatherView(weatherData)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -240,5 +245,9 @@ class MainActivity : BaseActivity<SearchAddressViewModel, ActivityMainBinding>()
 
     override fun onCurrentLocationRequired() {
         updateCurrentLocation()
+    }
+
+    override fun loadWeatherData() {
+        viewModel.loadWeatherData()
     }
 }
