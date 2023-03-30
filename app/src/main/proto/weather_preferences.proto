@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+option java_package = "com.jymun.usanchaengyeo";
+option java_multiple_files = true;
+
+message WeatherPreferences {
+    int32 weather = 1;
+    float speed = 2;
+    float size = 3;
+    float amount = 4;
+}

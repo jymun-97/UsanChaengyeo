@@ -21,4 +21,27 @@
         <item name="endIconMode">clear_text</item>
         <item name="endIconTint">@color/white</item>
     </style>
+
+    <style name="SettingLabelTextViewStyle">
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_marginTop">24dp</item>
+        <item name="android:layout_marginHorizontal">24dp</item>
+        <item name="android:textColor">@color/gray_light</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="SettingSliderStyle" parent="Widget.MaterialComponents.Slider">
+        <item name="android:layout_marginHorizontal">12dp</item>
+        <item name="thumbColor">@color/white</item>
+        <item name="thumbRadius">6dp</item>
+        <item name="trackColor">@color/gray</item>
+        <item name="android:valueFrom">0</item>
+        <item name="android:valueTo">100</item>
+        <item name="tickVisible">false</item>
+        <item name="android:stepSize">1</item>
+        <item name="tickMarkTint">@color/white</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
 </resources>

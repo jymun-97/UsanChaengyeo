@@ -6,6 +6,8 @@ import com.jymun.usanchaengyeo.data.repository.forecast.ForecastRepository
 import com.jymun.usanchaengyeo.data.repository.forecast.ForecastRepositoryImpl
 import com.jymun.usanchaengyeo.data.repository.history.HistoryRepository
 import com.jymun.usanchaengyeo.data.repository.history.HistoryRepositoryImpl
+import com.jymun.usanchaengyeo.data.repository.weather.WeatherPreferencesRepository
+import com.jymun.usanchaengyeo.data.repository.weather.WeatherPreferencesRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -33,4 +35,10 @@ abstract class RepositoryModule {
     abstract fun bindsForecastRepository(
         forecastRepositoryImpl: ForecastRepositoryImpl
     ): ForecastRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindsWeatherPreferencesRepository(
+        weatherPreferencesRepositoryImpl: WeatherPreferencesRepositoryImpl
+    ): WeatherPreferencesRepository
 }

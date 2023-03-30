@@ -28,4 +28,8 @@ object Versions {
     const val ROOM = "2.4.3"
     const val SWIPE_HELPER = "1.4"
     const val SPIN_KIT = "1.4.0"
+    const val PROTO_DATASTORE_PLUGIN = "0.8.17"
+    const val PROTO_DATASTORE = "3.18.0"
+    const val DATASTORE = "1.0.0"
+    const val PROTOC = "3.11.0"
 }

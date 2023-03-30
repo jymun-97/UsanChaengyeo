@@ -44,4 +44,10 @@
         <item>@color/purple</item>
         <item>@color/blue</item>
     </integer-array>
+
+    <string-array name="weather_names">
+        <item>@string/weather_rain</item>
+        <item>@string/weather_snow</item>
+        <item>@string/weather_clear</item>
+    </string-array>
 </resources>

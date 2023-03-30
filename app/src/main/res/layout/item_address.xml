@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:paddingHorizontal="30dp"
         android:paddingVertical="10dp"
-        tools:background="@drawable/app_content_background">
+        tools:background="@drawable/app_background">
 
         <ImageView
             android:id="@+id/imageView"

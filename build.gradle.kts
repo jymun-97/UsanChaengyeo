@@ -5,4 +5,5 @@ plugins {
     id(Plugins.KOTLIN_ANDROID) version Versions.KOTLIN apply false
     id(Plugins.HILT) version Versions.HILT apply false
     id(Plugins.NAVIGATION_SAFE_ARGS) version Versions.NAVIGATION apply false
+    id(Plugins.PROTO_DATASTORE) version Versions.PROTO_DATASTORE_PLUGIN apply false
 }

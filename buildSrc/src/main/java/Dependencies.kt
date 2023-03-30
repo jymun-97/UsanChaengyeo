@@ -47,4 +47,9 @@ object Dependencies {
 
     // Spin Kit
     const val SPIN_KIT = "com.github.ybq:Android-SpinKit:${Versions.SPIN_KIT}"
+
+    // Proto DataStore
+    const val DATASTORE = "androidx.datastore:datastore:${Versions.DATASTORE}"
+    const val PROTO_DATASTORE = "com.google.protobuf:protobuf-javalite:${Versions.PROTO_DATASTORE}"
+    const val PROTOC = "com.google.protobuf:protoc:${Versions.PROTOC}"
 }

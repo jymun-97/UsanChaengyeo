@@ -13,7 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:background="@drawable/app_content_background">
+        tools:background="@drawable/app_background">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/addressRecyclerView"

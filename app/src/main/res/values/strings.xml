@@ -30,4 +30,20 @@
     <string name="fail_to_connect_network_exception_message">네트워크 연결이 원활하지 않습니다.</string>
     <string name="fail_to_connect_server_exception_message">서버와의 연결이 원활하지 않습니다. 다시 시도해 주세요.</string>
     <string name="fail_to_load_current_location_exception_message">현재 위치를 불러오는 데 실패했습니다.</string>
+    <string name="fail_to_load_weather_preferences_exception_message">저장된 애니메이션 설정을 불러오는 데 실패했습니다.</string>
+
+    <string name="rain">비가 내리고 있어요!</string>
+    <string name="snow">눈이 내리고 있어요!</string>
+    <string name="clear">비활성 상태 입니다</string>
+
+    <string name="weather_rain">비</string>
+    <string name="weather_snow">눈</string>
+    <string name="weather_clear">비활성</string>
+    <string name="setting">환경설정</string>
+    <string name="setting_animation">애니메이션 설정</string>
+    <string name="setting_weather">무엇을 내릴까요?</string>
+    <string name="setting_speed">얼마나 빠르게 내릴까요?</string>
+    <string name="setting_size">얼마나 크게 내릴까요?</string>
+    <string name="setting_amount">얼마나 많이 내릴까요?</string>
+    <string name="load_default_weather_data">기본 설정 불러오기</string>
 </resources>
