@@ -6,7 +6,7 @@ import com.jymun.usanchaengyeo.data.entity.history.HistoryEntity
 @Dao
 interface HistoryDao {
 
-    @Query("SELECT * FROM history ORDER BY isPinned DESC")
+    @Query("SELECT * FROM history ORDER BY isPinned DESC, timestamp DESC")
     suspend fun loadAllHistory(): List<HistoryEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
