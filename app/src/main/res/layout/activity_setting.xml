@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="24dp"
             android:drawablePadding="10dp"
-            android:text="환경설정"
+            android:text="@string/setting"
             android:textAppearance="?attr/textAppearanceHeadline6"
             android:textColor="@color/white"
             android:textStyle="bold"
@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="12dp"
-            android:text="애니메이션 설정"
+            android:text="@string/setting_animation"
             android:textAppearance="?attr/textAppearanceBody2"
             android:textColor="@color/gray"
             app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +64,7 @@
         <TextView
             android:id="@+id/setWeatherTextView"
             style="@style/SettingLabelTextViewStyle"
-            android:text="무엇을 내릴까요?"
+            android:text="@string/setting_weather"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/divider" />
@@ -83,7 +83,7 @@
         <TextView
             android:id="@+id/speedTextView"
             style="@style/SettingLabelTextViewStyle"
-            android:text="얼마나 빠르게 내릴까요?"
+            android:text="@string/setting_speed"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/setWeatherSpinner" />
@@ -98,7 +98,7 @@
         <TextView
             android:id="@+id/sizeTextView"
             style="@style/SettingLabelTextViewStyle"
-            android:text="얼마나 크게 내릴까요?"
+            android:text="@string/setting_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/speedSlider" />
@@ -115,7 +115,7 @@
         <TextView
             android:id="@+id/amountTextView"
             style="@style/SettingLabelTextViewStyle"
-            android:text="얼마나 많이 내릴까요?"
+            android:text="@string/setting_amount"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/sizeSlider" />
@@ -135,7 +135,7 @@
             android:layout_margin="24dp"
             android:onClick="@{() -> viewModel.loadDefaultWeatherData()}"
             android:padding="20dp"
-            android:text="기본 설정 불러오기"
+            android:text="@string/load_default_weather_data"
             android:textColor="@color/gray"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"

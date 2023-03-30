@@ -39,4 +39,11 @@
     <string name="weather_rain">비</string>
     <string name="weather_snow">눈</string>
     <string name="weather_clear">비활성</string>
+    <string name="setting">환경설정</string>
+    <string name="setting_animation">애니메이션 설정</string>
+    <string name="setting_weather">무엇을 내릴까요?</string>
+    <string name="setting_speed">얼마나 빠르게 내릴까요?</string>
+    <string name="setting_size">얼마나 크게 내릴까요?</string>
+    <string name="setting_amount">얼마나 많이 내릴까요?</string>
+    <string name="load_default_weather_data">기본 설정 불러오기</string>
 </resources>
