@@ -40,7 +40,7 @@ class SearchAddressFragment : BaseFragment<SearchAddressViewModel, FragmentSearc
         if (it is LoadState.Error) {
             Toast.makeText(
                 requireActivity(),
-                resourcesProvider.getString(it.exception.messageResId),
+                it.exception.getMessage(resourcesProvider),
                 Toast.LENGTH_LONG
             ).show()
         }

@@ -38,7 +38,7 @@ class SettingActivity : BaseActivity<SettingViewModel, ActivitySettingBinding>()
         if (it is LoadState.Error) {
             Toast.makeText(
                 this,
-                resourcesProvider.getString(it.exception.messageResId),
+                it.exception.getMessage(resourcesProvider),
                 Toast.LENGTH_LONG
             ).show()
         }

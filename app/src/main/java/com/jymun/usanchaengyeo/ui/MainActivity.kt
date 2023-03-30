@@ -66,7 +66,7 @@ class MainActivity : BaseActivity<SearchAddressViewModel, ActivityMainBinding>()
         if (it is LoadState.Error) {
             submitAddress(
                 address = null,
-                stateText = resourcesProvider.getString(it.exception.messageResId)
+                stateText = it.exception.getMessage(resourcesProvider)
             )
         }
     }

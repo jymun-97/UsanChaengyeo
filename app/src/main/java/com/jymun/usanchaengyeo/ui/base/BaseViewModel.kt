@@ -28,7 +28,7 @@ abstract class BaseViewModel(
 
                 is SocketException, is SocketTimeoutException -> LoadState.Error(CustomExceptions.FailToConnectServerException)
 
-                else -> LoadState.Error(CustomExceptions.UnknownException(throwable.message ?: ""))
+                else -> LoadState.Error(CustomExceptions.UnknownException(throwable.message))
             }
         )
     }

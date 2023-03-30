@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -16,6 +17,7 @@ import com.jymun.usanchaengyeo.R
 import com.jymun.usanchaengyeo.data.model.history.History
 import com.jymun.usanchaengyeo.databinding.FragmentHistoryBinding
 import com.jymun.usanchaengyeo.ui.base.BaseFragment
+import com.jymun.usanchaengyeo.ui.base.LoadState
 import com.jymun.usanchaengyeo.ui.base.adapter.ModelRecyclerAdapter
 import com.jymun.usanchaengyeo.util.resources.ResourcesProvider
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,7 +40,15 @@ class HistoryFragment : BaseFragment<HistoryViewModel, FragmentHistoryBinding>()
         lifecycleOwner = viewLifecycleOwner
     }
 
-    override fun observeState() {}
+    override fun observeState() = viewModel.loadState.observe(viewLifecycleOwner) {
+        if (it is LoadState.Error) {
+            Toast.makeText(
+                requireActivity(),
+                it.exception.getMessage(resourcesProvider),
+                Toast.LENGTH_LONG
+            ).show()
+        }
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -61,6 +71,7 @@ class HistoryFragment : BaseFragment<HistoryViewModel, FragmentHistoryBinding>()
         adapter = ModelRecyclerAdapter<History>(resourcesProvider).apply {
             addAdapterListener(object : HistoryAdapterListener {
                 override fun onHistoryItemClicked(history: History) {
+                    viewModel.addHistory(history)
                     onHistorySelectedListener?.onHistorySelected(history)
                     moveToForecastFragment()
                 }
