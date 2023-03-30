@@ -2,6 +2,7 @@ package com.jymun.usanchaengyeo.util.exception
 
 import androidx.annotation.StringRes
 import com.jymun.usanchaengyeo.R
+import com.jymun.usanchaengyeo.util.resources.ResourcesProvider
 
 sealed class CustomExceptions(
     @StringRes val messageResId: Int
@@ -27,5 +28,9 @@ sealed class CustomExceptions(
         R.string.fail_to_load_weather_preferences_exception_message
     )
 
-    class UnknownException(message: String) : CustomExceptions(0)
+    class UnknownException(override val message: String?) : CustomExceptions(0)
+
+    fun getMessage(resourcesProvider: ResourcesProvider): String {
+        return if (messageResId == 0) message ?: "" else resourcesProvider.getString(messageResId)
+    }
 }
