@@ -20,9 +20,10 @@ class CoordinateToAddressUseCase @Inject constructor(
         latitude: Double
     ): Address = withContext(dispatcherProvider.default) {
 
-        val addressName = addressRepository.coordinateToAddress(longitude, latitude)
-        val addressEntityList = addressRepository.searchAddress(addressName.addressName)
+        val result = addressRepository.coordinateToAddress(longitude, latitude)
+        result.addressName ?: throw CustomExceptions.FailToLoadCurrentLocationException
 
+        val addressEntityList = addressRepository.searchAddress(result.addressName)
         if (addressEntityList.isEmpty()) {
             throw CustomExceptions.FailToLoadCurrentLocationException
         }
