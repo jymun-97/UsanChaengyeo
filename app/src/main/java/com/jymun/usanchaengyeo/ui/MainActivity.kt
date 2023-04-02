@@ -94,7 +94,9 @@ class MainActivity : BaseActivity<SearchAddressViewModel, ActivityMainBinding>()
             )
         }
         viewModel.searchKeyword.observe(this) { searchKeyword ->
-            replaceFragment(searchKeyword)
+            if (binding.addressView.hasFocused) {
+                replaceFragment(searchKeyword)
+            }
         }
     }
 

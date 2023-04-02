@@ -12,6 +12,7 @@
     <string name="deleted_history">최근 검색 기록이 삭제되었습니다.</string>
     <string name="cancel">취소</string>
     <string name="forecast_unit">단위 : mm</string>
+    <string name="history">최근 검색 기록</string>
 
     <string name="forecast_description_1">비가 아예 내리지 않거나 체감을 못느끼는 정도</string>
     <string name="forecast_description_2">육안으로 식별되나 물웅덩이는 생기지 않는 정도</string>

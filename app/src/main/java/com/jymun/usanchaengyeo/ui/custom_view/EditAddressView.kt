@@ -36,6 +36,7 @@ class EditAddressView(
                 stateTextView.visibility = View.VISIBLE
             }
         }
+    var hasFocused = false
 
     init {
         initViews()
@@ -49,6 +50,7 @@ class EditAddressView(
     private fun initAddressTextInput() = binding.apply {
         addressTextInputLayout.visibility = View.INVISIBLE
         addressEditText.setOnFocusChangeListener { _, hasFocus ->
+            hasFocused = hasFocus
             if (hasFocus) {
                 addressTextContainer.visibility = View.INVISIBLE
                 stateTextView.visibility = View.INVISIBLE
