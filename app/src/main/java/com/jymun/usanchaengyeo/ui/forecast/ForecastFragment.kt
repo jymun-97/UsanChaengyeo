@@ -42,9 +42,11 @@ class ForecastFragment : BaseFragment<ForecastViewModel, FragmentForecastBinding
 
     override fun observeState() = viewModel.loadState.observe(viewLifecycleOwner) {
         if (it is LoadState.Error) {
+            val errorText = it.exception.getMessage(resourcesProvider)
+            binding.commentTextView.text = errorText
             Toast.makeText(
                 requireActivity(),
-                it.exception.getMessage(resourcesProvider),
+                errorText,
                 Toast.LENGTH_LONG
             ).show()
         }
