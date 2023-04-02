@@ -21,8 +21,8 @@ class AddressRemoteDataSource @Inject constructor(
     ): AddressName = withContext(dispatcherProvider.io) {
 
         val response = addressServiceClient.coordinateToAddressName(longitude, latitude)
-        
-        if (!response.isSuccessful || response.body() == null) throw CustomExceptions.FailToConnectServerException
+
+        if (!response.isSuccessful || response.body() == null) throw CustomExceptions.FailToLoadCurrentLocationException
         return@withContext response.body()!!
     }
 

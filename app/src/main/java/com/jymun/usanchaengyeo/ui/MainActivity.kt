@@ -9,6 +9,7 @@ import android.graphics.Rect
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -64,6 +65,7 @@ class MainActivity : BaseActivity<SearchAddressViewModel, ActivityMainBinding>()
 
     override fun observeState() = viewModel.loadState.observe(this) {
         if (it is LoadState.Error) {
+            Log.d("# MainActivity", "${it.exception}")
             submitAddress(
                 address = null,
                 stateText = it.exception.getMessage(resourcesProvider)
