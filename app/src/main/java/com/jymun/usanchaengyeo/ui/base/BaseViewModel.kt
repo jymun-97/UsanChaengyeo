@@ -1,5 +1,6 @@
 package com.jymun.usanchaengyeo.ui.base
 
+import android.util.MalformedJsonException
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -27,6 +28,10 @@ abstract class BaseViewModel(
                 is UnknownHostException, is ConnectException -> LoadState.Error(CustomExceptions.FailToConnectNetworkException)
 
                 is SocketException, is SocketTimeoutException -> LoadState.Error(CustomExceptions.FailToConnectServerException)
+
+                is MalformedJsonException, is com.google.gson.stream.MalformedJsonException -> LoadState.Error(
+                    CustomExceptions.FailToConnectServerException
+                )
 
                 else -> LoadState.Error(CustomExceptions.UnknownException(throwable.message))
             }
