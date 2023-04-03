@@ -47,4 +47,6 @@
     <string name="setting_size">얼마나 크게 내릴까요?</string>
     <string name="setting_amount">얼마나 많이 내릴까요?</string>
     <string name="load_default_weather_data">기본 설정 불러오기</string>
+
+    <string name="back_pressed">\'뒤로\' 버튼을 한번 더 누르시면 종료됩니다.</string>
 </resources>
