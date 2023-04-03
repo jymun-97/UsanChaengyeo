@@ -105,7 +105,10 @@ class SettingActivity : BaseActivity<SettingViewModel, ActivitySettingBinding>()
                 position: Int,
                 id: Long
             ) {
-                if (userIsInteracting) viewModel.updateWeatherData(adapter.getItem(position) as WeatherData)
+                if (userIsInteracting) {
+                    getWeatherViewInstance().resetWeather()
+                    viewModel.updateWeatherData(adapter.getItem(position) as WeatherData)
+                }
             }
         }
     }

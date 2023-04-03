@@ -30,6 +30,7 @@ abstract class BaseActivity<VM : BaseViewModel, B : ViewDataBinding> : AppCompat
 
     override fun onStart() {
         super.onStart()
+        weatherView.resetWeather()
         loadWeatherData()
     }
 
