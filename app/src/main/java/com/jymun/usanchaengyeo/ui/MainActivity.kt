@@ -8,11 +8,15 @@ import android.content.pm.PackageManager
 import android.graphics.Rect
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.provider.Settings
 import android.util.Log
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -51,6 +55,36 @@ class MainActivity : BaseActivity<SearchAddressViewModel, ActivityMainBinding>()
     private lateinit var navHost: NavHostFragment
     private lateinit var navController: NavController
     private lateinit var forecastFragment: ForecastFragment
+    private var doubleBackToExitPressedOnce = false
+
+    private val onBackPressedCallback = object : OnBackPressedCallback(true) {
+
+        override fun handleOnBackPressed() {
+            when {
+                navHost.childFragmentManager.backStackEntryCount > 0 -> {
+                    val selectedAddress = viewModel.selectedAddress.value
+                    submitAddress(
+                        selectedAddress,
+                        if (selectedAddress == null) resourcesProvider.getString(R.string.loading_address) else null
+                    )
+                    navController.popBackStack()
+                }
+                !doubleBackToExitPressedOnce -> {
+                    doubleBackToExitPressedOnce = true
+                    Toast.makeText(
+                        this@MainActivity,
+                        resourcesProvider.getString(R.string.back_pressed),
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        doubleBackToExitPressedOnce = false
+                    }, 2000)
+                }
+                else -> finish()
+            }
+        }
+    }
 
     override val viewModel: SearchAddressViewModel by viewModels()
 
@@ -80,6 +114,7 @@ class MainActivity : BaseActivity<SearchAddressViewModel, ActivityMainBinding>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
 
         initNavigation()
         initAddressView()
