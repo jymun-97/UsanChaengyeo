@@ -31,7 +31,7 @@ class ForecastInfoHelper @Inject constructor(
 
     fun map(forecastList: List<Forecast>): ForecastInfo {
         val max = forecastList.maxOf { it.value }
-        val target = starts.findLast { it <= max } ?: 0
+        val target = starts.indexOfLast { it <= max }
 
         return infoList[target]
     }
