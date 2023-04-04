@@ -39,6 +39,10 @@ android {
             buildConfigField("String", "address_service_key", addressServiceKey)
             buildConfigField("String", "forecast_api_key", forecastServiceKey)
         }
+        getByName("release") {
+            buildConfigField("String", "address_service_key", addressServiceKey)
+            buildConfigField("String", "forecast_api_key", forecastServiceKey)
+        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
