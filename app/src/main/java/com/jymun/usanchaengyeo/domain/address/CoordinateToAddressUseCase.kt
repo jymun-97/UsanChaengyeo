@@ -24,19 +24,28 @@ class CoordinateToAddressUseCase @Inject constructor(
         result.addressName ?: throw CustomExceptions.FailToLoadCurrentLocationException
 
         val addressEntityList = addressRepository.searchAddress(result.addressName)
-        if (addressEntityList.isEmpty()) {
-            throw CustomExceptions.FailToLoadCurrentLocationException
-        }
 
-        val entity = addressEntityList.first()
-        return@withContext Address(
-            id = "${entity.placeName} ${entity.addressName}".hashCode().toLong(),
-            type = ModelType.ADDRESS,
-            placeName = entity.placeName,
-            addressName = entity.addressName,
-            roadAddressName = entity.roadAddressName,
-            x = entity.x,
-            y = entity.y
-        )
+        return@withContext if (addressEntityList.isNotEmpty()) {
+            val entity = addressEntityList.first()
+            Address(
+                id = 0L,
+                type = ModelType.ADDRESS,
+                placeName = entity.placeName,
+                addressName = entity.addressName,
+                roadAddressName = entity.roadAddressName,
+                x = entity.x,
+                y = entity.y
+            )
+        } else {
+            Address(
+                id = 0L,
+                type = ModelType.ADDRESS,
+                placeName = result.roadAddressName ?: "",
+                addressName = result.addressName,
+                roadAddressName = result.roadAddressName ?: "",
+                x = longitude.toString(),
+                y = latitude.toString()
+            )
+        }
     }
 }
