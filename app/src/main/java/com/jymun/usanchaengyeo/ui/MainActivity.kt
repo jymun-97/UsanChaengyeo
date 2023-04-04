@@ -121,7 +121,6 @@ class MainActivity : BaseActivity<SearchAddressViewModel, ActivityMainBinding>()
         initToolbar()
         initFusedLocationProviderClient()
         initPermissionLauncher()
-        launchPermissionLauncher()
 
         viewModel.selectedAddress.observe(this) {
             submitAddress(
@@ -135,6 +134,11 @@ class MainActivity : BaseActivity<SearchAddressViewModel, ActivityMainBinding>()
                 replaceFragment(searchKeyword)
             }
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        launchPermissionLauncher()
     }
 
     private fun initNavigation() {
