@@ -18,7 +18,7 @@
         tools:background="@drawable/app_background">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:autoSizeMaxTextSize="16sp"
@@ -49,11 +49,11 @@
             tools:layout_height="100dp" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:autoSizeMaxTextSize="16sp"
-            android:autoSizeMinTextSize="10sp"
+            android:autoSizeMinTextSize="6sp"
             android:autoSizeStepGranularity="1sp"
             android:autoSizeTextType="uniform"
             android:gravity="center"
