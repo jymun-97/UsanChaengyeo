@@ -1,6 +1,7 @@
 package com.jymun.usanchaengyeo.ui.forecast
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -17,6 +18,7 @@ import com.jymun.usanchaengyeo.databinding.FragmentForecastBinding
 import com.jymun.usanchaengyeo.ui.base.BaseFragment
 import com.jymun.usanchaengyeo.ui.base.LoadState
 import com.jymun.usanchaengyeo.ui.base.adapter.ModelRecyclerAdapter
+import com.jymun.usanchaengyeo.util.exception.CustomExceptions
 import com.jymun.usanchaengyeo.util.forecast.ForecastInfoHelper
 import com.jymun.usanchaengyeo.util.resources.ResourcesProvider
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,6 +35,8 @@ class ForecastFragment : BaseFragment<ForecastViewModel, FragmentForecastBinding
 
     override val viewModel: ForecastViewModel by activityViewModels()
 
+    private var flag = false
+
     override fun getViewDataBinding() = FragmentForecastBinding.inflate(layoutInflater)
 
     override fun setUpBinding() = binding.apply {
@@ -42,6 +46,13 @@ class ForecastFragment : BaseFragment<ForecastViewModel, FragmentForecastBinding
 
     override fun observeState() = viewModel.loadState.observe(viewLifecycleOwner) {
         if (it is LoadState.Error) {
+            if (!flag) {
+                Log.d("# ForecastFragment", "try again")
+                flag = true
+                viewModel.runForecast()
+
+                return@observe
+            }
             val errorText = it.exception.getMessage(resourcesProvider)
             binding.commentTextView.text = errorText
             Toast.makeText(
@@ -49,6 +60,8 @@ class ForecastFragment : BaseFragment<ForecastViewModel, FragmentForecastBinding
                 errorText,
                 Toast.LENGTH_LONG
             ).show()
+        } else if (it is LoadState.Success) {
+            flag = false
         }
     }
 
@@ -91,12 +104,14 @@ class ForecastFragment : BaseFragment<ForecastViewModel, FragmentForecastBinding
                     onCurrentLocationRequiredListener?.onCurrentLocationRequired()
                     true
                 }
+
                 R.id.refresh -> {
                     viewModel.runForecast() {
                         onCurrentLocationRequiredListener?.onCurrentLocationRequired()
                     }
                     true
                 }
+
                 else -> false
             }
         }

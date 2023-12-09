@@ -22,6 +22,10 @@ class ForecastViewModel @Inject constructor(
     val forecastResult: LiveData<List<Forecast>?>
         get() = _forecastResult
 
+    fun runForecast() = selectedAddress.value?.let {
+        runForecast(it)
+    }
+
     fun runForecast(address: Address) = onMainDispatcher {
         selectedAddress.postValue(address)
         _forecastResult.postValue(
