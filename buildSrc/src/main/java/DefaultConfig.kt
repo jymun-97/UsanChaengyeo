@@ -2,8 +2,8 @@ object DefaultConfig {
     const val COMPILE_SDK_VERSION = 33
     const val MIN_SDK_VERSION = 26
     const val TARGET_SDK_VERSION = 33
-    const val VERSION_CODE = 3
-    const val VERSION_NAME = "1.0.2"
+    const val VERSION_CODE = 4
+    const val VERSION_NAME = "1.0.3"
 
     const val TEST_INSTRUMENTATION_RUNNER = "androidx.test.runner.AndroidJUnitRunner"
 }
