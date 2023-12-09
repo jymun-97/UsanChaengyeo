@@ -1,5 +1,7 @@
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 import com.google.protobuf.gradle.*
+import java.io.FileInputStream
+import java.util.Properties
 
 plugins {
     id(Plugins.ANDROID_APPLICATION)
@@ -12,10 +14,21 @@ plugins {
 
 val addressServiceKey: String = gradleLocalProperties(rootDir).getProperty("address_service_key")
 val forecastServiceKey: String = gradleLocalProperties(rootDir).getProperty("forecast_api_key")
+val keystoreProperties = Properties()
+keystoreProperties.load(FileInputStream(rootProject.file("keystore.properties")))
 
 android {
     namespace = "com.jymun.usanchaengyeo"
     compileSdk = DefaultConfig.COMPILE_SDK_VERSION
+
+    signingConfigs {
+        create("release") {
+            keyAlias = keystoreProperties["keyAlias"] as String
+            keyPassword = keystoreProperties["keyPassword"] as String
+            storeFile = file(keystoreProperties["storeFile"] as String)
+            storePassword = keystoreProperties["storePassword"] as String
+        }
+    }
 
     defaultConfig {
         applicationId = "com.jymun.usanchaengyeo"
@@ -28,12 +41,17 @@ android {
     }
 
     buildTypes {
+        debug {
+            isMinifyEnabled = true
+            proguardFile(getDefaultProguardFile("proguard-android-optimize.txt"))
+            proguardFile("proguard-rules.pro")
+            proguardFile("proguard-debug.pro")
+        }
         release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+//            signingConfig = signingConfigs.getByName("release")
+            isMinifyEnabled = true
+            proguardFile(getDefaultProguardFile("proguard-android-optimize.txt"))
+            proguardFile("proguard-rules.pro")
         }
         getByName("debug") {
             buildConfigField("String", "address_service_key", addressServiceKey)
